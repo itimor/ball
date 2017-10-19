@@ -19,23 +19,19 @@ class FootBallLeague(models.Model):
 
 
 class FootBallGame(models.Model):
-    name = models.CharField(u'比赛名字', unique=True, max_length=100, null=True, blank=True)
-    Team1 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'主队', related_name='team1')
-    Team2 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'客队', related_name='team2')
+    Team1 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'主队',
+                              related_name='team1')
+    Team2 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'客队',
+                              related_name='team2')
     Score1 = models.IntegerField(u'主队得分')
     Score2 = models.IntegerField(u'客队得分')
     MatchDate = models.CharField(u'比赛日期', max_length=100, blank=True)
     MatchTime = models.CharField(u'比赛时间', max_length=100, blank=True)
     league = models.ForeignKey('FootBallLeague', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'联队')
-    euro = models.ForeignKey('FootBallEuropean', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'欧洲赔率')
+    euro = models.OneToOneField('FootBallEuropean', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'欧洲赔率')
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        self.name = str(self.league) + "(" + str(self.Team1) + "对阵" + str(self.Team2)
-        super(FootBallGame, self).save()
-
 
 class FootBallCompany(models.Model):
     name = models.CharField(u'欧赔公司', unique=True, max_length=100, blank=True)
@@ -47,6 +43,7 @@ class FootBallCompany(models.Model):
 
 
 class FootBallEuropean(models.Model):
+    title = models.CharField(u'比赛名字', unique=True, max_length=100, null=True, blank=True)
     name = models.ForeignKey('FootBallCompany', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'欧赔公司')
     odds_ini_o1 = models.FloatField(u'欧赔初胜水位', max_length=11)
     odds_ini_o2 = models.FloatField(u'欧赔初平水位', max_length=11)
@@ -68,4 +65,4 @@ class FootBallEuropean(models.Model):
     kelly_new_time = models.DateTimeField(u'欧赔后变盘时间', max_length=11)
 
     def __str__(self):
-        return self.name
+        return self.title

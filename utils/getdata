@@ -1,0 +1,4 @@
+#获取欧赔公司名字
+
+url： http://match.lottery.sina.com.cn/football/ai/europe?m_id=3642573
+xpath规则： //*/tr[1]/td[2]

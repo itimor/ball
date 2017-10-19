@@ -23,7 +23,7 @@ b_ids = list(set(s))
 b_he_url =  '{}{}'.format(b_url,3642573)
 b_html = requests.get(b_he_url).text
 soup = BeautifulSoup(b_html, 'html.parser')
-print(soup)  #打印源码发现展示数据用的ajax
+
 #F12查找js发现真正的数据url
 #head_data
 real_url = 'http://odds.sports.sina.com.cn/liveodds/getMatchInfo?m_id={}&format=json'.format(3642573)

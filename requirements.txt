@@ -8,5 +8,6 @@ dry-rest-permissions==0.1.9
 olefile==0.44
 Pillow==4.3.0
 PyJWT==1.5.3
+PyMySQL==0.7.11
 pytz==2017.2
 six==1.11.0

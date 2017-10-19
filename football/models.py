@@ -6,8 +6,8 @@ from django.db import models
 
 class FootBallTeam(models.Model):
     teamId = models.IntegerField(u'球队id')
-    name = models.CharField(u'球队名称', max_length=100, blank=True)
-    cnname = models.CharField(u'球队中文名', max_length=100, blank=True)
+    name = models.CharField(u'球队名称', unique=True, max_length=100, blank=True)
+    cnname = models.CharField(u'球队中文名', unique=True, max_length=100, blank=True)
     league = models.ForeignKey('FootBallLeague', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'联队')
 
     def __str__(self):
@@ -15,11 +15,11 @@ class FootBallTeam(models.Model):
 
 
 class FootBallLeague(models.Model):
-    name = models.CharField(u'联赛名称', max_length=100, blank=True)
+    name = models.CharField(u'联赛名称', unique=True, max_length=100, blank=True)
 
 
 class FootBallGame(models.Model):
-    name = models.CharField(u'比赛名字', max_length=100, null=True, blank=True)
+    name = models.CharField(u'比赛名字', unique=True, max_length=100, null=True, blank=True)
     Team1 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'主队', related_name='team1')
     Team2 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'客队', related_name='team2')
     Score1 = models.IntegerField(u'主队得分')
@@ -38,7 +38,7 @@ class FootBallGame(models.Model):
 
 
 class FootBallCompany(models.Model):
-    name = models.CharField(u'欧赔公司', max_length=100, blank=True)
+    name = models.CharField(u'欧赔公司', unique=True, max_length=100, blank=True)
     famous = models.BooleanField(u'主流公司', default=False)
     exchange = models.BooleanField(u'交易所', default=False)
 

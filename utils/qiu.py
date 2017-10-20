@@ -52,6 +52,7 @@ for euro_data in euro_datas:
     is_famous = ("false","true")[euro_data["if_famous"] is "0"]      #python三元表达式，条件成立会执行第二个
     if_exchange = ("false","true")[euro_data["if_exchange"] is "0"]
     company_data = {"name":euro_data["name"],"famous":is_famous,"exchange":if_exchange,}
+    print(company_data)
     company = requests.post(company_url, data=company_data)
     try:
         print("company sucess")

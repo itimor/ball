@@ -7,3 +7,4 @@ migrations/
 yarn-debug.log*
 yarn-error.log*
 *.out
+*.db

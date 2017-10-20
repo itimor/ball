@@ -52,7 +52,6 @@ for euro_data in euro_datas:
     is_famous = ("false","true")[euro_data["if_famous"] is "0"]      #python三元表达式，条件成立会执行第二个
     if_exchange = ("false","true")[euro_data["if_exchange"] is "0"]
     company_data = {"name":euro_data["name"],"famous":is_famous,"exchange":if_exchange,}
-    print(company_data)
     company = requests.post(company_url, data=company_data)
     try:
         print("company sucess")
@@ -66,21 +65,21 @@ for euro_data in euro_datas:
     euro_dat = {
     "title": game_name,
     "name": euro_data["name"],
-    "odds_ini_o1": euro_data["odds"]["ini"]["ol"],
+    "odds_ini_o1": euro_data["odds"]["ini"]["o1"],
     "odds_ini_o2": euro_data["odds"]["ini"]["o2"],
     "odds_ini_o3": euro_data["odds"]["ini"]["o3"],
     "odds_ini_return": euro_data["odds"]["ini"]["return"],
     "odds_ini_time": euro_data["odds"]["ini"]["change_time"],
-    "odds_new_o1": euro_data["odds"]["new"]["ol"],
+    "odds_new_o1": euro_data["odds"]["new"]["o1"],
     "odds_new_o2": euro_data["odds"]["new"]["o2"],
     "odds_new_o3": euro_data["odds"]["new"]["o3"],
     "odds_new_return": euro_data["odds"]["new"]["return"],
     "odds_new_time": euro_data["odds"]["new"]["change_time"],
-    "kelly_ini_e1": euro_data["kelly"]["ini"]["el"],
+    "kelly_ini_e1": euro_data["kelly"]["ini"]["e1"],
     "kelly_ini_e2": euro_data["kelly"]["ini"]["e2"],
     "kelly_ini_e3": euro_data["kelly"]["ini"]["e33"],
     "kelly_ini_time": euro_data["kelly"]["ini"]["change_time"],
-    "kelly_new_e1": euro_data["kelly"]["new"]["el"],
+    "kelly_new_e1": euro_data["kelly"]["new"]["e1"],
     "kelly_new_e2": euro_data["kelly"]["new"]["e2"],
     "kelly_new_e3": euro_data["kelly"]["new"]["e33"],
     "kelly_new_time": euro_data["kelly"]["new"]["change_time"]

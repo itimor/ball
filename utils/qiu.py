@@ -4,6 +4,7 @@
 import requests
 import re
 import json
+import time
 
 dataturl = "http://sports.sina.com.cn/data/caculator/sfc/"
 
@@ -54,6 +55,7 @@ for euro_data in euro_datas:
     company = requests.post(company_url, data=company_data)
     try:
         print("company sucess")
+        time.sleep(1)
     except requests.exceptions.ConnectionError:
         print(e)
 
@@ -85,6 +87,7 @@ for euro_data in euro_datas:
     euro = requests.post(euro_url, data=euro_dat)
     try:
         print("euro sucess")
+        time.sleep(2)
     except Exception as e:
         print(e)
 

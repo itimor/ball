@@ -58,22 +58,22 @@ WSGI_APPLICATION = 'ball.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'football.db'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ball',    ## 数据库名称
-        'USER': 'ball',
-        'PASSWORD': 'ball110',    ## 安装 mysql 数据库时，输入的 root 用户的密码
-        'HOST': '222.186.169.42',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'football.db'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ball',    ## 数据库名称
+#         'USER': 'ball',
+#         'PASSWORD': 'ball110',    ## 安装 mysql 数据库时，输入的 root 用户的密码
+#         'HOST': '222.186.169.42',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

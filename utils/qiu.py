@@ -7,12 +7,21 @@ import json
 import time
 
 dataturl = "http://sports.sina.com.cn/data/caculator/sfc/"
+apiurl = "http://47.90.82.112:8000/"
+
+# Team
+league_url = apiurl + "footballleague/"
+team_url = apiurl + "footballteam/"
+game_url = apiurl + "footballgame/"
+
+# Euro
+euro_url = apiurl + "footballeuropean/"
+company_url = apiurl + "footballcompany/"
 
 s_qi = 16117
 e_qi = 16198
 
-
-for qi in range(16117,16199):
+for qi in range(s_qi,e_qi+1):
     he_url = "{}{}.html".format(dataturl, qi)
     html_data = requests.get(he_url).text
 
@@ -32,15 +41,6 @@ for qi in range(16117,16199):
 
         head_data = json.loads(head_html)["result"]["data"]
         euro_datas = json.loads(euro_html)["result"]["data"]
-
-        # Team
-        league_url = "http://47.90.82.112:8000/api/footballleague/"
-        team_url = "http://47.90.82.112:8000/api/footballteam/"
-        game_url = "http://47.90.82.112:8000/api/footballgame/"
-
-        # Euro
-        euro_url = "http://47.90.82.112:8000/api/footballeuropean/"
-        company_url = "http://47.90.82.112:8000/api/footballcompany/"
 
         league_data = {"name": head_data["ln"]}
         league = requests.post(league_url, data=league_data)

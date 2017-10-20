@@ -77,11 +77,11 @@ for euro_data in euro_datas:
     "odds_new_time": euro_data["odds"]["new"]["change_time"],
     "kelly_ini_e1": euro_data["kelly"]["ini"]["e1"],
     "kelly_ini_e2": euro_data["kelly"]["ini"]["e2"],
-    "kelly_ini_e3": euro_data["kelly"]["ini"]["e33"],
+    "kelly_ini_e3": euro_data["kelly"]["ini"]["e3"],
     "kelly_ini_time": euro_data["kelly"]["ini"]["change_time"],
     "kelly_new_e1": euro_data["kelly"]["new"]["e1"],
     "kelly_new_e2": euro_data["kelly"]["new"]["e2"],
-    "kelly_new_e3": euro_data["kelly"]["new"]["e33"],
+    "kelly_new_e3": euro_data["kelly"]["new"]["e3"],
     "kelly_new_time": euro_data["kelly"]["new"]["change_time"]
 }
     euro = requests.post(euro_url, data=euro_dat)

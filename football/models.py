@@ -28,7 +28,7 @@ class FootBallGame(models.Model):
     MatchDate = models.CharField(u'比赛日期', max_length=100, blank=True)
     MatchTime = models.CharField(u'比赛时间', max_length=100, blank=True)
     league = models.ForeignKey('FootBallLeague', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'联队')
-    euro = models.OneToOneField('FootBallEuropean', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'欧洲赔率')
+    euro = models.ManyToManyField('FootBallEuropean', null=True, blank=True, verbose_name=u'欧洲赔率')
 
     def __str__(self):
         return self.name

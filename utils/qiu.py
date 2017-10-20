@@ -29,13 +29,17 @@ head_html = requests.get(head_url).text
 euro_html = requests.get(euro_url).text
 
 head_data = json.loads(head_html)['result']['data']
+euro_data = json.loads(head_html)['result']['data']
 
 # Team
 league_url = 'http://47.90.82.112:8000/api/footballleague/'
 team_url = 'http://47.90.82.112:8000/api/footballteam/'
 game_url = 'http://47.90.82.112:8000/api/footballgame/'
 
-game_name = head_data['ln'] + '-' + head_data['Team1'] + '-' + head_data['Team2'] + '-' + head_data['MatchDate']
+# Euro
+
+
+game_name = head_data['Team1'] + '-' + head_data['Team2'] + '-' + head_data['MatchDate']
 league_data = {"name": head_data['ln']}
 team_data1 = {"teamId": head_data['Team1Id'], "name": head_data['Team1en'], "cnname": head_data['Team1'],
               "league": head_data['ln']}
@@ -43,7 +47,7 @@ team_data2 = {"teamId": head_data['Team2Id'], "name": head_data['Team2en'], "cnn
               "league": head_data['ln']}
 game_data = {"name": '', "Team1": head_data['Team1'], "Team2": head_data['Team2'], "Score1": head_data['Score1'],
              "Score2": head_data['Score2'], "MatchDate": head_data["MatchDate"], "MatchTime": head_data['MatchTime'],
-             "league": head_data['ln'], "euro": game_name}
+             "league": head_data['ln'], "euro": [game_name]}
 
 league = requests.post(league_url, data=league_data)
 if league.status_code == 200:

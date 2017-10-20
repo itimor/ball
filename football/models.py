@@ -11,11 +11,14 @@ class FootBallTeam(models.Model):
     league = models.ForeignKey('FootBallLeague', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'联队')
 
     def __str__(self):
-        return self.name
+        return self.cnname
 
 
 class FootBallLeague(models.Model):
     name = models.CharField(u'联赛名称', unique=True, max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class FootBallGame(models.Model):

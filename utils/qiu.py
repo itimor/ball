@@ -41,11 +41,11 @@ game_url = "http://47.90.82.112:8000/api/footballgame/"
 euro_url = "http://47.90.82.112:8000/api/footballeuropean/"
 company_url = "http://47.90.82.112:8000/api/footballcompany/"
 
-league_data = {"name": head_data["ln"]}
-team_data1 = {"teamId": head_data["Team1Id"], "name": head_data["Team1en"], "cnname": head_data["Team1"],
-              "league": head_data["ln"]}
-team_data2 = {"teamId": head_data["Team2Id"], "name": head_data["Team2en"], "cnname": head_data["Team2"],
-              "league": head_data["ln"]}
+team_data1 = {"teamId": head_data["Team1Id"], "name": head_data["Team1en"], "cnname": head_data["Team1"],"league": head_data["ln"]}
+team_data2 = {"teamId": head_data["Team2Id"], "name": head_data["Team2en"], "cnname": head_data["Team2"],"league": head_data["ln"]}
+team1 = requests.post(team_url, data=team_data1)
+team2 = requests.post(team_url, data=team_data2)
+
 game_names = []
 for euro_data in euro_datas:
     #company
@@ -91,13 +91,19 @@ for euro_data in euro_datas:
     except Exception as e:
         print(e)
 
-#
-# league = requests.post(league_url, data=league_data)
-# try:
-#     print("league sucess")
-# except requests.exceptions.ConnectionError:
-#     print({"code":league.status_code,"msg":json.loads(league.text)["name"][0]})
-#
-# game_data = {"Team1": head_data["Team1"], "Team2": head_data["Team2"], "Score1": head_data["Score1"],
-#              "Score2": head_data["Score2"], "MatchDate": head_data["MatchDate"], "MatchTime": head_data["MatchTime"],
-#              "league": head_data["ln"], "euro": game_names}
+league_data = {"name": head_data["ln"]}
+league = requests.post(league_url, data=league_data)
+try:
+    print("league sucess")
+except requests.exceptions.ConnectionError:
+    print({"code":league.status_code,"msg":json.loads(league.text)["name"][0]})
+
+game_data = {"Team1": head_data["Team1"], "Team2": head_data["Team2"], "Score1": head_data["Score1"],
+             "Score2": head_data["Score2"], "MatchDate": head_data["MatchDate"], "MatchTime": head_data["MatchTime"],
+             "league": head_data["ln"], "euro": game_names}
+game = requests.post(game_url, data=game_data)
+
+try:
+    print("game sucess")
+except requests.exceptions.ConnectionError:
+    print({"code":game.status_code,"msg":json.loads(game.text)["name"][0]})

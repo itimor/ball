@@ -48,8 +48,8 @@ team_data2 = {"teamId": head_data["Team2Id"], "name": head_data["Team2en"], "cnn
 game_names = []
 for euro_data in euro_datas:
     #company
-    is_famous = ("false","true")[euro_data["is_famous"]==0]      #python三元表达式，条件成立会执行第二个
-    if_exchange = ("false","true")[euro_data["if_exchange"]==0]
+    is_famous = ("false","true")[euro_data["is_famous"]=="0"]      #python三元表达式，条件成立会执行第二个
+    if_exchange = ("false","true")[euro_data["if_exchange"]=="0"]
     company_data = {"name":euro_data["name"],"famous":is_famous,"exchange":if_exchange,}
     company = requests.post(company_url, data=company_data)
     if company.status_code == 200:

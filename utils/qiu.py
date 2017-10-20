@@ -21,7 +21,7 @@ company_url = apiurl + "footballcompany/"
 s_qi = 16117
 e_qi = 16198
 
-for qi in range(s_qi,e_qi+1):
+for qi in range(s_qi,s_qi+1):
     he_url = "{}{}.html".format(dataturl, qi)
     html_data = requests.get(he_url).text
 
@@ -31,6 +31,7 @@ for qi in range(s_qi,e_qi+1):
     b_ids = list(set(s))
 
     for b_id in b_ids:
+        print(b_id)
         # head_data
         head_url = "http://odds.sports.sina.com.cn/liveodds/getMatchInfo?m_id={}&format=json".format(b_id)
         # euro_data

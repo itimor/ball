@@ -102,7 +102,6 @@ game_data = {"Team1": head_data["Team1"], "Team2": head_data["Team2"], "Score1":
              "Score2": head_data["Score2"], "MatchDate": head_data["MatchDate"], "MatchTime": head_data["MatchTime"],
              "league": head_data["ln"], "euro": game_names}
 game = requests.post(game_url, data=game_data)
-
 try:
     print("game sucess")
 except requests.exceptions.ConnectionError:

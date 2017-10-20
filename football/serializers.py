@@ -33,7 +33,8 @@ class FootBallEuropeanSerializer(serializers.ModelSerializer):
 class FootBallGameSerializer(serializers.ModelSerializer):
     league = serializers.SlugRelatedField(queryset=FootBallLeague.objects.all(), slug_field='name')
     euro = serializers.SlugRelatedField(many=True, queryset=FootBallEuropean.objects.all(), slug_field='title')
-
+    Team1 = serializers.SlugRelatedField(queryset=FootBallTeam.objects.all(), slug_field='cnname')
+    Team2 = serializers.SlugRelatedField(queryset=FootBallTeam.objects.all(), slug_field='cnname')
     class Meta:
         model = FootBallGame
         fields = ('url', 'id', 'Team1', 'Team2', 'Score1', 'Score2', 'MatchDate', 'MatchTime', 'league', 'euro')

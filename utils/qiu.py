@@ -29,7 +29,7 @@ head_html = requests.get(head_url).text
 euro_html = requests.get(euro_url).text
 
 head_data = json.loads(head_html)["result"]["data"]
-euro_datas = json.loads(head_html)["result"]["data"]
+euro_datas = json.loads(euro_html)["result"]["data"]
 
 # Team
 league_url = "http://47.90.82.112:8000/api/footballleague/"
@@ -48,8 +48,7 @@ team_data2 = {"teamId": head_data["Team2Id"], "name": head_data["Team2en"], "cnn
 game_names = []
 for euro_data in euro_datas:
     #company
-    print(euro_data["is_famous"])
-    is_famous = ("false","true")[euro_data["is_famous"] is "0"]      #python三元表达式，条件成立会执行第二个
+    is_famous = ("false","true")[euro_data["if_famous"] is "0"]      #python三元表达式，条件成立会执行第二个
     if_exchange = ("false","true")[euro_data["if_exchange"] is "0"]
     company_data = {"name":euro_data["name"],"famous":is_famous,"exchange":if_exchange,}
     company = requests.post(company_url, data=company_data)

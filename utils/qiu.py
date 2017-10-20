@@ -52,10 +52,10 @@ for euro_data in euro_datas:
     if_exchange = ("false","true")[euro_data["if_exchange"] is "0"]
     company_data = {"name":euro_data["name"],"famous":is_famous,"exchange":if_exchange,}
     company = requests.post(company_url, data=company_data)
-    if company.status_code == 200:
+    try:
         print("company sucess")
-    else:
-        print({"code": company.status_code, "msg": json.loads(company.text)["name"][0]})
+    except requests.exceptions.ConnectionError:
+        print(e)
 
     #euro
     game_name = head_data["Team1"] + "-" + head_data["Team2"] + "-" + head_data["MatchDate"] + "-" + euro_data["name"]
@@ -83,16 +83,16 @@ for euro_data in euro_datas:
     "kelly_new_time": euro_data["kelly"]["new"]["change_time"]
 }
     euro = requests.post(euro_url, data=euro_dat)
-    if euro.status_code == 200:
+    try:
         print("euro sucess")
-    else:
-        print({"code": euro.status_code, "msg": json.loads(euro.text)["name"][0]})
+    except Exception as e:
+        print(e)
 
 #
 # league = requests.post(league_url, data=league_data)
-# if league.status_code == 200:
+# try:
 #     print("league sucess")
-# else:
+# except requests.exceptions.ConnectionError:
 #     print({"code":league.status_code,"msg":json.loads(league.text)["name"][0]})
 #
 # game_data = {"Team1": head_data["Team1"], "Team2": head_data["Team2"], "Score1": head_data["Score1"],

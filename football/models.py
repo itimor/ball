@@ -44,7 +44,7 @@ class FootBallCompany(models.Model):
 
 class FootBallEuropean(models.Model):
     title = models.CharField(u'比赛名字', unique=True, max_length=100, null=True, blank=True)
-    name = models.ForeignKey('FootBallCompany', on_delete=models.SET_NULL, null=True, blank=True, u'欧赔公司')
+    name = models.ForeignKey('FootBallCompany', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'欧赔公司')
     odds_ini_o1 = models.FloatField(u'欧赔初胜水位', max_length=11)
     odds_ini_o2 = models.FloatField(u'欧赔初平水位', max_length=11)
     odds_ini_o3 = models.FloatField(u'欧赔初负水位', max_length=11)

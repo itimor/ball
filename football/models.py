@@ -22,6 +22,7 @@ class FootBallLeague(models.Model):
 
 
 class FootBallGame(models.Model):
+    name = models.CharField(u'比赛名字', unique=True, max_length=100, null=True, blank=True)
     Team1 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'主队',
                               related_name='team1')
     Team2 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'客队',
@@ -35,6 +36,10 @@ class FootBallGame(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = self.Team1 + '-' + self.Team2 + '-' + self.MatchDate
+        super(FootBallGame, self).save()
 
 class FootBallCompany(models.Model):
     name = models.CharField(u'欧赔公司', unique=True, max_length=100, blank=True)

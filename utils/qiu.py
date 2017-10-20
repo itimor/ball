@@ -19,7 +19,6 @@ for qi in range(16117,16199):
     repr = re.compile("\?m_id=(\d+)", re.M)
     s = repr.findall(html_data)
 
-    b_url = "http://match.lottery.sina.com.cn/football/ai/europe?m_id="
     b_ids = list(set(s))
 
     for b_id in b_ids:

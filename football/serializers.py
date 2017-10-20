@@ -24,8 +24,7 @@ class FootBallEuropeanSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FootBallEuropean
-        fields = (
-            'url', 'id', 'title', 'name', 'odds_ini_o1', 'odds_ini_o2', 'odds_ini_o3', 'odds_ini_return',
+        fields = ('url', 'id', 'title', 'name', 'odds_ini_o1', 'odds_ini_o2', 'odds_ini_o3', 'odds_ini_return',
             'odds_ini_time', 'odds_new_o1', 'odds_new_o2', 'odds_new_o3', 'odds_new_return', 'odds_new_time',
             'kelly_ini_e1', 'kelly_ini_e2', 'kelly_ini_e3', 'kelly_ini_time', 'kelly_new_e1', 'kelly_new_e2',
             'kelly_new_e3', 'kelly_new_time',)
@@ -33,7 +32,7 @@ class FootBallEuropeanSerializer(serializers.ModelSerializer):
 
 class FootBallGameSerializer(serializers.ModelSerializer):
     league = serializers.SlugRelatedField(queryset=FootBallLeague.objects.all(), slug_field='name')
-    euro = serializers.SlugRelatedField(many=True, ueryset=FootBallEuropean.objects.all(), slug_field='name')
+    euro = serializers.SlugRelatedField(many=True, queryset=FootBallEuropean.objects.all(), slug_field='title')
 
     class Meta:
         model = FootBallGame

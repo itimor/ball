@@ -22,7 +22,7 @@ company_url = apiurl + "footballcompany/"
 s_qi = 16117
 e_qi = 16198
 
-for qi in range(s_qi, s_qi + 1):
+for qi in range(s_qi, e_qi + 1):
     print(qi)
     he_url = "{}{}.html".format(dataturl, qi)
     html_data = requests.get(he_url).text

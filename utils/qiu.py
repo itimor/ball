@@ -111,17 +111,16 @@ for qi in range(s_qi, s_qi + 1):
                 except Exception as e:
                     print(e)
 
-        print(game_names)
         gameName = head_data["Team1"] + '-' + head_data["Team2"] + '-' + head_data["MatchDate"]
         game_exist = requests.get(game_url + '?name=' + gameName)
         if not json.loads(game_exist.text)['count']:
-            game_data = {"name": gameName, "Team1": head_data["Team1"], "Team2": head_data["Team2"],
-                         "Score1": head_data["Score1"],
-                         "Score2": head_data["Score2"], "MatchDate": head_data["MatchDate"],
-                         "MatchTime": head_data["MatchTime"],
-                         "league": head_data["ln"], "euro": game_names}
-            game = requests.post(game_url, data=game_data)
             try:
-                print("game sucess")
-            except requests.exceptions.ConnectionError:
-                print({"code": game.status_code, "msg": json.loads(game.text)["name"][0]})
+                game_data = {"name": gameName, "Team1": head_data["Team1"], "Team2": head_data["Team2"],
+                             "Score1": head_data["Score1"],
+                             "Score2": head_data["Score2"], "MatchDate": head_data["MatchDate"],
+                             "MatchTime": head_data["MatchTime"],
+                             "league": head_data["ln"], "euro": game_names}
+                game = requests.post(game_url, data=game_data)
+                if game.status_code == 200: print(gameName)
+            except Exception as e:
+                print(e)

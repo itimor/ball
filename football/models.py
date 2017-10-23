@@ -37,9 +37,6 @@ class FootBallGame(models.Model):
     def __str__(self):
         return self.name
 
-    # def save(self, *args, **kwargs):
-    #     self.name = str(self.Team1) + '-' + str(self.Team2) + '-' + str(self.MatchDate)
-    #     super(FootBallGame, self).save()
 
 class FootBallCompany(models.Model):
     name = models.CharField(u'欧赔公司', unique=True, max_length=100, blank=True)

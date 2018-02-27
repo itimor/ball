@@ -3,7 +3,7 @@
 
 from rest_framework.routers import DefaultRouter
 from users.views import UserViewSet, GroupViewSet, RoleViewSet
-from football.views import (FootBallCompanyViewSet, FootBallEuropeanViewSet, FootBallGameViewSet, FootBallTeamViewSet,
+from soccer.views import (FootBallCompanyViewSet, FootBallEuropeanViewSet, FootBallGameViewSet, FootBallTeamViewSet,
                             FootBallLeagueViewSet)
 
 router = DefaultRouter()

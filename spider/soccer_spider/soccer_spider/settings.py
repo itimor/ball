@@ -21,8 +21,8 @@ ITEM_PIPELINES = {
 
 DOWNLOADER_MIDDLEWARES = {
     'soccer_spider.middlewares.RandomUserAgent': 1,
-    #'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
-    #'soccer_spider.middlewares.ProxyMiddleware': 100,
+    # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+    # 'soccer_spider.middlewares.ProxyMiddleware': 100,
 }
 
 NEWSPIDER_MODULE = 'soccer_spider.spiders'
@@ -30,7 +30,7 @@ NEWSPIDER_MODULE = 'soccer_spider.spiders'
 IMAGES_STORE = '/home/cugbacm/zhuzekun/soccer/img'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36"
+# USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36"
 
 DOWNLOAD_DELAY = 2
 
@@ -94,10 +94,10 @@ USER_AGENTS = [
 ]
 
 PROXIES = [
-    #{'ip_port': '117.185.16.52:80', 'user_pass': ''},
-    #{'ip_port': '122.193.14.85:80', 'user_pass': ''},
-    #{'ip_port': '220.181.111.57:80', 'user_pass': ''},
+    # {'ip_port': '117.185.16.52:80', 'user_pass': ''},
+    # {'ip_port': '122.193.14.85:80', 'user_pass': ''},
+    # {'ip_port': '220.181.111.57:80', 'user_pass': ''},
     {'ip_port': '122.193.14.103:80', 'user_pass': ''},
 ]
 
-COOKIES_ENABLES=True
+COOKIES_ENABLES = True

@@ -8,18 +8,18 @@ class NewsSpider(scrapy.Spider):
 
     allowed_domains = ["ba1.win007.com"]
     start_urls = (
-        "http://ba1.win007.com/pub/ThemePageContent?id=3158&page=1",
+        "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3158&page=1",
     )
 
     def parse(self, response):
         # 英超
-        yingchao_url = "http://ba1.win007.com/pub/ThemePageContent?id=3158"
+        yingchao_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3158"
         # 西甲
-        xijia_url = "http://ba1.win007.com/pub/ThemePageContent?id=3159"
+        xijia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3159"
         # 意甲
-        yijia_url = "http://ba1.win007.com/pub/ThemePageContent?id=3161"
+        yijia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3161"
         # 德甲
-        dejia_url = "http://ba1.win007.com/pub/ThemePageContent?id=3162"
+        dejia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3162"
 
         compname = "英超"
         for i in range(1, 3):

@@ -9,7 +9,7 @@ class NewsSpider(scrapy.Spider):
 
     allowed_domains = ["ba1.win007.com", "ba2.win007.com"]
     start_urls = (
-	"http://ba2.win007.com",
+        "http://ba2.win007.com",
     )
 
     def parse(self, response):

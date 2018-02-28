@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import datetime
-import json
 from soccer_spider.items import News, Image
-import sys
-reload(sys) # Python2.5 初始化后会删除 sys.setdefaultencoding 这个方法，我们需要重新载入
-sys.setdefaultencoding('utf-8')
+
 
 class NewsSpider(scrapy.Spider):
     name = "news_spider"
@@ -30,28 +26,28 @@ class NewsSpider(scrapy.Spider):
             page_url = yingchao_url + "&page=" + str(i)
             yield scrapy.http.Request(url=page_url,
                                       callback=lambda response,
-                                      compname=compname : self.crawl_news_list(response, compname))
+                                                      compname=compname: self.crawl_news_list(response, compname))
 
         compname = "西甲"
         for i in range(1, 3):
             page_url = xijia_url + "&page=" + str(i)
             yield scrapy.http.Request(url=page_url,
                                       callback=lambda response,
-                                      compname=compname : self.crawl_news_list(response, compname))
+                                                      compname=compname: self.crawl_news_list(response, compname))
 
         compname = "意甲"
         for i in range(1, 3):
             page_url = yijia_url + "&page=" + str(i)
             yield scrapy.http.Request(url=page_url,
                                       callback=lambda response,
-                                      compname=compname : self.crawl_news_list(response, compname))
+                                                      compname=compname: self.crawl_news_list(response, compname))
 
         compname = "德甲"
         for i in range(1, 3):
             page_url = dejia_url + "&page=" + str(i)
             yield scrapy.http.Request(url=page_url,
                                       callback=lambda response,
-                                      compname=compname : self.crawl_news_list(response, compname))
+                                                      compname=compname: self.crawl_news_list(response, compname))
 
     def crawl_news_list(self, response, compname):
         news_url_list = response.selector.xpath('//li/div[@class=" infoBox "]/a[2]/@href').extract()
@@ -59,7 +55,7 @@ class NewsSpider(scrapy.Spider):
             news_url = "http://ba1.win007.com" + url
             yield scrapy.http.Request(url=news_url,
                                       callback=lambda response,
-                                      compname=compname : self.crawl_news(response, compname))
+                                                      compname=compname: self.crawl_news(response, compname))
 
     def crawl_news(self, response, compname):
         title = response.selector.xpath('//div[@class="qiuba_title"]//text()').extract()[1].strip()
@@ -84,7 +80,7 @@ class NewsSpider(scrapy.Spider):
                     source = ''.join(line.strip().split("\r\n")[0].split("：")[1:])
                     continue
                 if line.strip().find("看不够？戳我") != -1 or \
-                   line.strip().find("本翻译文档及图片仅供吧友学习研究之用，版权归属原作者，未经许可不得转载，不得用于任何商业用途") != -1:
+                                line.strip().find("本翻译文档及图片仅供吧友学习研究之用，版权归属原作者，未经许可不得转载，不得用于任何商业用途") != -1:
                     continue
                 content_list.append(line)
             img_list = p.xpath('.//img/@src').extract()

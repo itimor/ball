@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import datetime
 import json
 from soccer_spider.items import Match, NowCompInfo, TeamJifen, MatchAsiaLottery, MatchEuropeLottery
-import sys
-reload(sys) # Python2.5 初始化后会删除 sys.setdefaultencoding 这个方法，我们需要重新载入
-sys.setdefaultencoding('utf-8')
+
 
 class LotterySpider(scrapy.Spider):
     name = "lottery_spider"
@@ -29,29 +26,36 @@ class LotterySpider(scrapy.Spider):
 
     def crawl_comp(self, url):
         return scrapy.http.Request(url=url,
-                                   callback=lambda response : self.crawl_round(response))
+                                   callback=lambda response: self.crawl_round(response))
 
     def crawl_round(self, response):
         matches = json.loads(response.body)
         for d in matches["result"]["data"]:
-            print d["LeagueType_cn"], d["Season"], d["Round"], d["Team1"], d["Team2"], d["oddsid"]
+            print
+            d["LeagueType_cn"], d["Season"], d["Round"], d["Team1"], d["Team2"], d["oddsid"]
             compname = d["LeagueType_cn"]
-            yapei = "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&_sport_t_=Odds&_sport_a_=AsiaIniNewData&id=" + d["oddsid"]
+            yapei = "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&_sport_t_=Odds&_sport_a_=AsiaIniNewData&id=" + \
+                    d["oddsid"]
             yield scrapy.http.Request(url=yapei,
                                       callback=lambda response,
-                                      host_team=d["Team1"],
-                                      guest_team=d["Team2"],
-                                      season=d["Season"],
-                                      compname=compname,
-                                      rd=int(d["Round"]): self.crawl_yapei(response, host_team, guest_team, season, compname, rd))
-            oupei = "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&_sport_t_=Odds&_sport_a_=euroIniNewData&id=" + d["oddsid"]
+                                                      host_team=d["Team1"],
+                                                      guest_team=d["Team2"],
+                                                      season=d["Season"],
+                                                      compname=compname,
+                                                      rd=int(d["Round"]): self.crawl_yapei(response, host_team,
+                                                                                           guest_team, season, compname,
+                                                                                           rd))
+            oupei = "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&_sport_t_=Odds&_sport_a_=euroIniNewData&id=" + \
+                    d["oddsid"]
             yield scrapy.http.Request(url=oupei,
                                       callback=lambda response,
-                                      host_team=d["Team1"],
-                                      guest_team=d["Team2"],
-                                      season=d["Season"],
-                                      compname=compname,
-                                      rd=int(d["Round"]): self.crawl_oupei(response, host_team, guest_team, season, compname, rd))
+                                                      host_team=d["Team1"],
+                                                      guest_team=d["Team2"],
+                                                      season=d["Season"],
+                                                      compname=compname,
+                                                      rd=int(d["Round"]): self.crawl_oupei(response, host_team,
+                                                                                           guest_team, season, compname,
+                                                                                           rd))
 
     def crawl_yapei(self, response, host_team, guest_team, season, compname, rd):
         result = json.loads(response.body)

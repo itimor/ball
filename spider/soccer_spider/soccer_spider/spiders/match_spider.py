@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import datetime
-import json
 from soccer_spider.items import Match, NowCompInfo, TeamJifen, MatchAsiaLottery, TeamLogoImage, Image
-import sys
-reload(sys) # Python2.5 初始化后会删除 sys.setdefaultencoding 这个方法，我们需要重新载入
-sys.setdefaultencoding('utf-8')
+
 
 class MatchSpider(scrapy.Spider):
     name = "match_spider"
@@ -35,17 +31,19 @@ class MatchSpider(scrapy.Spider):
     def crawl_comp(self, url, compname):
         return scrapy.http.Request(url=url,
                                    callback=lambda response,
-                                   compname=compname : self.crawl_round_list(response, compname))
-
+                                                   compname=compname: self.crawl_round_list(response, compname))
 
     def crawl_round_list(self, response, compname):
         round_list = response.selector.xpath('//div[@class="turnTime clearfix"]/dl/dd/a')
-        season = response.selector.xpath('//section[@class="leftNav"]//span[@class="mcSelectBox"]/a[@class="imitateSelect"]/b/text()').extract()[0]
-        jifen_url = response.selector.xpath('//section[@class="leftNav"]//div[@class="matchStatBody sign"]/div[@class="lineBottom"][1]/ul/li[2]/a/@href').extract()[0]
+        season = response.selector.xpath(
+            '//section[@class="leftNav"]//span[@class="mcSelectBox"]/a[@class="imitateSelect"]/b/text()').extract()[0]
+        jifen_url = response.selector.xpath(
+            '//section[@class="leftNav"]//div[@class="matchStatBody sign"]/div[@class="lineBottom"][1]/ul/li[2]/a/@href').extract()[
+            0]
         yield scrapy.http.Request(url=jifen_url,
-                                   callback=lambda response,
-                                   compname=compname,
-                                   season=season : self.crawl_jifen(response, compname, season))
+                                  callback=lambda response,
+                                                  compname=compname,
+                                                  season=season: self.crawl_jifen(response, compname, season))
         now_rd = None
         for rd in round_list:
             active = rd.xpath('@class').extract()[0]
@@ -55,8 +53,8 @@ class MatchSpider(scrapy.Spider):
             url = response.url + "?weekId=" + str(rd_num)
             yield scrapy.http.Request(url=url,
                                       callback=lambda response,
-                                      compname=compname,
-                                      rd=rd_num : self.crawl_round(response, compname, rd))
+                                                      compname=compname,
+                                                      rd=rd_num: self.crawl_round(response, compname, rd))
         now_comp_info = NowCompInfo()
         now_comp_info["compname"] = compname
         now_comp_info["now_rd"] = now_rd
@@ -97,7 +95,8 @@ class MatchSpider(scrapy.Spider):
 
     def crawl_round(self, response, compname, rd):
         match_list = response.selector.xpath('//div[@class="listWrap"]/table/tr')
-        season = response.selector.xpath('//section[@class="leftNav"]//span[@class="mcSelectBox"]/a[@class="imitateSelect"]/b/text()').extract()[0]
+        season = response.selector.xpath(
+            '//section[@class="leftNav"]//span[@class="mcSelectBox"]/a[@class="imitateSelect"]/b/text()').extract()[0]
         for m in match_list:
             match_info = m.xpath('td//text()').extract()
             url = m.xpath('td[last()]/a/@href').extract()[0]
@@ -126,10 +125,14 @@ class MatchSpider(scrapy.Spider):
             yield match
 
     def crawl_team_logo(self, response):
-        host_team = response.selector.xpath('//div[@class="m-top-info f-fl m-top-pl"]/p[@class="name f-fwb"]/text()').extract()[0]
-        guest_team = response.selector.xpath('//div[@class="m-top-info f-fl m-top-pr"]/p[@class="name f-fwb"]/text()').extract()[0]
-        host_logo_url = response.selector.xpath('//div[@class="m-top-b"]/div[@class="m-imgBox m-top-box1"]/img/@src').extract()[0]
-        guest_logo_url = response.selector.xpath('//div[@class="m-top-b"]/div[@class="m-imgBox m-top-box2"]/img/@src').extract()[0]
+        host_team = \
+        response.selector.xpath('//div[@class="m-top-info f-fl m-top-pl"]/p[@class="name f-fwb"]/text()').extract()[0]
+        guest_team = \
+        response.selector.xpath('//div[@class="m-top-info f-fl m-top-pr"]/p[@class="name f-fwb"]/text()').extract()[0]
+        host_logo_url = \
+        response.selector.xpath('//div[@class="m-top-b"]/div[@class="m-imgBox m-top-box1"]/img/@src').extract()[0]
+        guest_logo_url = \
+        response.selector.xpath('//div[@class="m-top-b"]/div[@class="m-imgBox m-top-box2"]/img/@src').extract()[0]
 
         host_logo = TeamLogoImage()
         host_logo["source"] = host_logo_url

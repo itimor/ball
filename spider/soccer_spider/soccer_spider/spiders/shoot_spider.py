@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import datetime
-import json
 from soccer_spider.items import Shooter
-import sys
-reload(sys) # Python2.5 初始化后会删除 sys.setdefaultencoding 这个方法，我们需要重新载入
-sys.setdefaultencoding('utf-8')
+
 
 class ShooterSpider(scrapy.Spider):
     name = "shooter_spider"
@@ -35,17 +31,19 @@ class ShooterSpider(scrapy.Spider):
     def crawl_comp(self, url, compname):
         return scrapy.http.Request(url=url,
                                    callback=lambda response,
-                                   compname=compname : self.crawl_round_list(response, compname))
-
+                                                   compname=compname: self.crawl_round_list(response, compname))
 
     def crawl_round_list(self, response, compname):
         round_list = response.selector.xpath('//div[@class="turnTime clearfix"]/dl/dd/a')
-        season = response.selector.xpath('//section[@class="leftNav"]//span[@class="mcSelectBox"]/a[@class="imitateSelect"]/b/text()').extract()[0]
-        shooter_url = response.selector.xpath('//section[@class="leftNav"]//div[@class="matchStatBody sign"]/div[@class="lineBottom"][1]/ul/li[6]/a/@href').extract()[0]
+        season = response.selector.xpath(
+            '//section[@class="leftNav"]//span[@class="mcSelectBox"]/a[@class="imitateSelect"]/b/text()').extract()[0]
+        shooter_url = response.selector.xpath(
+            '//section[@class="leftNav"]//div[@class="matchStatBody sign"]/div[@class="lineBottom"][1]/ul/li[6]/a/@href').extract()[
+            0]
         yield scrapy.http.Request(url=shooter_url,
-                                   callback=lambda response,
-                                   compname=compname,
-                                   season=season : self.crawl_shooter(response, compname, season))
+                                  callback=lambda response,
+                                                  compname=compname,
+                                                  season=season: self.crawl_shooter(response, compname, season))
 
     def crawl_shooter(self, response, compname, season):
         shooter_list = response.selector.xpath('//div[@class="listWrap"]/table/tr')

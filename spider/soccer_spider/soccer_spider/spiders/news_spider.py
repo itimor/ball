@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import json
 from soccer_spider.items import News, Image
 
 
 class NewsSpider(scrapy.Spider):
     name = "news_spider"
 
-    allowed_domains = ["ba2.win007.com"]
+    allowed_domains = ["ba1.win007.com", "ba2.win007.com"]
     start_urls = (
-        "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3158&page=1",
+	"http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=3158&page=1",
     )
 
     def parse(self, response):
-        print(response)
         # 英超
-        yingchao_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3158"
+        yingchao_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=3158"
         # 西甲
-        xijia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3159"
+        xijia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=3159"
         # 意甲
-        yijia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3161"
+        yijia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=3161"
         # 德甲
-        dejia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3162"
+        dejia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=3162"
 
         compname = "英超"
         for i in range(1, 3):
@@ -51,7 +51,7 @@ class NewsSpider(scrapy.Spider):
                                                       compname=compname: self.crawl_news_list(response, compname))
 
     def crawl_news_list(self, response, compname):
-        news_url_list = response.selector.xpath('//li/div[@class="infoBox"]/a[2]/@href').extract()
+        news_url_list = response.selector.xpath('//li/div[2]/a[2]/@href').extract()
         for url in news_url_list:
             news_url = "http://ba1.win007.com" + url
             yield scrapy.http.Request(url=news_url,

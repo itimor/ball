@@ -6,12 +6,13 @@ from soccer_spider.items import News, Image
 class NewsSpider(scrapy.Spider):
     name = "news_spider"
 
-    allowed_domains = ["ba1.win007.com"]
+    allowed_domains = ["ba2.win007.com"]
     start_urls = (
         "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3158&page=1",
     )
 
     def parse(self, response):
+        print(response)
         # 英超
         yingchao_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=3&order=1&id=3158"
         # 西甲

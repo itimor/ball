@@ -24,6 +24,7 @@ class NewsSpider(scrapy.Spider):
         compname = "英超"
         for i in range(1, 3):
             page_url = yingchao_url + "&page=" + str(i)
+            print(page_url)
             yield scrapy.http.Request(url=page_url,
                                       callback=lambda response,
                                                       compname=compname: self.crawl_news_list(response, compname))
@@ -51,6 +52,7 @@ class NewsSpider(scrapy.Spider):
 
     def crawl_news_list(self, response, compname):
         news_url_list = response.selector.xpath('//li/div[@class=" infoBox "]/a[2]/@href').extract()
+        print(news_url_list)
         for url in news_url_list:
             news_url = "http://ba1.win007.com" + url
             yield scrapy.http.Request(url=news_url,

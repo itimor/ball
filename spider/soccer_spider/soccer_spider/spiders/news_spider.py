@@ -51,7 +51,7 @@ class NewsSpider(scrapy.Spider):
                                                       compname=compname: self.crawl_news_list(response, compname))
 
     def crawl_news_list(self, response, compname):
-        news_url_list = response.selector.xpath('//li/div[@class=" infoBox "]/a[2]/@href').extract()
+        news_url_list = response.selector.xpath('//li/div[@class="infoBox"]/a[2]/@href').extract()
         for url in news_url_list:
             news_url = "http://ba1.win007.com" + url
             yield scrapy.http.Request(url=news_url,

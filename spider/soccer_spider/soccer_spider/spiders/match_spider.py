@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from soccer_spider.items import Match, NowCompInfo, TeamJifen, MatchAsiaLottery, TeamLogoImage, Image
+from soccer_spider.items import Match, NowCompInfo, TeamJifen, MatchAsiaLottery
 
 
 class MatchSpider(scrapy.Spider):
@@ -121,30 +121,4 @@ class MatchSpider(scrapy.Spider):
             match["guest_team"] = output[3].strip().split('(')[0].strip()
             match["season"] = season
             match["url"] = url
-            yield scrapy.http.Request(url, callback=self.crawl_team_logo)
             yield match
-
-    def crawl_team_logo(self, response):
-        host_team = \
-        response.selector.xpath('//div[@class="m-top-info f-fl m-top-pl"]/p[@class="name f-fwb"]/text()').extract()[0]
-        guest_team = \
-        response.selector.xpath('//div[@class="m-top-info f-fl m-top-pr"]/p[@class="name f-fwb"]/text()').extract()[0]
-        host_logo_url = \
-        response.selector.xpath('//div[@class="m-top-b"]/div[@class="m-imgBox m-top-box1"]/img/@src').extract()[0]
-        guest_logo_url = \
-        response.selector.xpath('//div[@class="m-top-b"]/div[@class="m-imgBox m-top-box2"]/img/@src').extract()[0]
-
-        host_logo = TeamLogoImage()
-        host_logo["source"] = host_logo_url
-        host_logo["image_urls"] = [host_logo_url]
-        host_logo["raw_url"] = host_logo_url
-        host_logo["team"] = host_team
-
-        guest_logo = TeamLogoImage()
-        guest_logo["source"] = guest_logo_url
-        guest_logo["image_urls"] = [guest_logo_url]
-        guest_logo["raw_url"] = guest_logo_url
-        guest_logo["team"] = guest_team
-
-        yield host_logo
-        yield guest_logo

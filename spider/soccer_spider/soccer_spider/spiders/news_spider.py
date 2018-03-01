@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
-from soccer_spider.items import News, Image
+from soccer_spider.items import News
 
 
 class NewsSpider(scrapy.Spider):
@@ -84,19 +84,6 @@ class NewsSpider(scrapy.Spider):
                                 line.strip().find("本翻译文档及图片仅供吧友学习研究之用，版权归属原作者，未经许可不得转载，不得用于任何商业用途") != -1:
                     continue
                 content_list.append(line)
-            img_list = p.xpath('.//img/@src').extract()
-            for img in img_list:
-                # 卧槽这个网站太贱了，有的图片带http前缀，有的不带
-                if img.find("http") != 0:
-                    img_url = "http://ba1.win007.com" + img
-                else:
-                    img_url = img
-                image = Image()
-                image["source"] = response.url
-                image["image_urls"] = [img_url]
-                image["raw_url"] = img_url
-                yield image
-                content_list.append(img_url)
 
         news = News()
         news["title"] = title

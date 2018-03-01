@@ -25,36 +25,6 @@ class News(scrapy.Item):
     publish_time = scrapy.Field()
     # 赛事名称
     compname = scrapy.Field()
-    # 缩略图
-    small_images = scrapy.Field()
-
-
-class Image(scrapy.Item):
-    # source
-    source = scrapy.Field()
-    # 原始url
-    raw_url = scrapy.Field()
-
-    image_urls = scrapy.Field()
-
-    images = scrapy.Field()
-
-    # 在服务器文件系统中的相对路径
-    # 真正的路径是 settings.IMAGES_STORE + "/" + image_path
-    image_path = scrapy.Field()
-
-    # 宽
-    width = scrapy.Field()
-    # 高
-    height = scrapy.Field()
-    # 缩略图中的宽
-    small_width = scrapy.Field()
-    # 缩略图中的高
-    small_height = scrapy.Field()
-
-
-class TeamLogoImage(Image):
-    team = scrapy.Field()
 
 
 class Match(scrapy.Item):

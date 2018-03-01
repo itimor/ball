@@ -16,26 +16,7 @@ class NewsPipeline(object):
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.News'>":
             print(item["url"], dict(item))
-            # item.gen_news()
-            # processed_news_db_api.add_news(item["url"], dict(item))
-        elif str(item.__class__) == "<class 'soccer_spider.items.Image'>":
-            # 设置图片原始size和缩略图size
-            self.set_size(item)
-            print(item["raw_url"], dict(item))
         return item
-
-    def set_size(self, item):
-        item["image_path"] = item["images"][0]["path"]
-        im = Image.open(settings.IMAGES_STORE + "/" + item["image_path"])
-        item["width"] = im.size[0]
-        item["height"] = im.size[1]
-        # 计算缩放比例
-        rate = max(float(item["width"]) / float(settings.SMALL_IMAGE_WIDTH),
-                   float(item["height"]) / float(settings.SMALL_IMAGE_HEIGHT))
-        # 宽度和高度不能超过设定的最大值
-        item["small_width"] = int(min(settings.SMALL_IMAGE_WIDTH, math.ceil(float(item["width"]) / rate)))
-        item["small_height"] = int(min(settings.SMALL_IMAGE_HEIGHT, math.ceil(float(item["height"]) / rate)))
-
 
 class MatchPipeline(object):
     def process_item(self, item, spider):
@@ -47,9 +28,6 @@ class MatchPipeline(object):
             print(item["compname"], dict(item))
         elif str(item.__class__) == "<class 'soccer_spider.items.TeamJifen'>":
             print(item["compname"], item["team"], item["season"], dict(item))
-        elif str(item.__class__) == "<class 'soccer_spider.items.TeamLogoImage'>":
-            item["image_path"] = item["images"][0]["path"]
-            print(item["team"], dict(item))
         return item
 
 

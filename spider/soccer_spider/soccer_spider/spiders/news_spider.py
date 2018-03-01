@@ -72,14 +72,10 @@ class NewsSpider(scrapy.Spider):
                                            /div[@class="qiubaBox"]\
                                            /div[@class="qiuba_Info"]\
                                            /*')
-        source = ""
         content_list = []
         for p in content[3:]:
             line = p.xpath('string(.)').extract()[0]
             if len(line) > 0:
-                if line.strip().find("来源：") == 0:
-                    source = ''.join(line.strip().split("\r\n")[0].split("：")[1:])
-                    continue
                 if line.strip().find("看不够？戳我") != -1 or \
                                 line.strip().find("本翻译文档及图片仅供吧友学习研究之用，版权归属原作者，未经许可不得转载，不得用于任何商业用途") != -1:
                     continue
@@ -95,7 +91,6 @@ class NewsSpider(scrapy.Spider):
 
         news["author"] = author
         news["content"] = content_list
-        news["source"] = source
         news["publish_time"] = publish_time
         news["compname"] = compname
         news["url"] = response.url

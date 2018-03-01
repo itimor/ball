@@ -19,8 +19,6 @@ class News(scrapy.Item):
     author = scrapy.Field()
     # 正文
     content = scrapy.Field()
-    # 来源
-    source = scrapy.Field()
     # 发布时间
     publish_time = scrapy.Field()
     # 赛事名称

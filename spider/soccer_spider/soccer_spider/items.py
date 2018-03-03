@@ -28,7 +28,7 @@ class News(scrapy.Item):
 class Match(scrapy.Item):
     # pending running end
     status = scrapy.Field()
-    # 英超、欧冠、德甲、意甲、法甲、西甲、中超
+    # 英超、德甲、法甲、西甲
     compname = scrapy.Field()
     # 赛季
     season = scrapy.Field()
@@ -107,7 +107,7 @@ class Shooter(scrapy.Item):
 
 
 class MatchAsiaLottery(scrapy.Item):
-    # 英超、欧冠、德甲、意甲、法甲、西甲、中超
+    # 英超、德甲、法甲、西甲
     compname = scrapy.Field()
     # 赛季
     season = scrapy.Field()
@@ -132,7 +132,7 @@ class MatchAsiaLottery(scrapy.Item):
 
 
 class MatchEuropeLottery(scrapy.Item):
-    # 英超、欧冠、德甲、意甲、法甲、西甲、中超
+    # 英超、德甲、法甲、西甲
     compname = scrapy.Field()
     # 赛季
     season = scrapy.Field()

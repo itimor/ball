@@ -1,6 +1,0 @@
-#获取欧赔公司名字
-
-url： http://match.lottery.sina.com.cn/football/ai/europe?m_id=3642573
-xpath规则： //*/tr[1]/td[2]
-curl post:
-curl -d "{"name": $i,"famous": true,"exchange": false}" -H "Content-Type: application/json" -X POST http://47.90.82.112:8000/api/footballcompany/

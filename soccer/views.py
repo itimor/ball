@@ -1,32 +1,44 @@
 # -*- coding: utf-8 -*-
 # author: itimor
 
-from soccer.models import FootBallTeam, FootBallCompany, FootBallEuropean, FootBallGame, FootBallLeague
 from rest_framework import viewsets
-from soccer.serializers import (FootBallCompanySerializer, FootBallEuropeanSerializer, FootBallGameSerializer,
-                                  FootBallLeagueSerializer, FootBallTeamSerializer)
+from soccer.models import (SoccerNews, NowCompInfo, SoccerTeamJifen, SoccerShooter, SoccerMatch, SoccerMatchAsia,
+                           SoccerMatchEurope)
+from soccer.serializers import (SoccerNewsSerializer, NowCompInfoSerializer, SoccerTeamJifenSerializer,
+                                SoccerShooterSerializer, SoccerMatchSerializer, SoccerMatchAsiaSerializer,
+                                SoccerMatchEuropeSerializer)
 
 
-class FootBallTeamViewSet(viewsets.ModelViewSet):
-    queryset = FootBallTeam.objects.all()
-    serializer_class = FootBallTeamSerializer
+class SoccerNewsViewSet(viewsets.ModelViewSet):
+    queryset = SoccerNews.objects.all()
+    serializer_class = SoccerNewsSerializer
 
 
-class FootBallCompanyViewSet(viewsets.ModelViewSet):
-    queryset = FootBallCompany.objects.all()
-    serializer_class = FootBallCompanySerializer
+class NowCompInfoViewSet(viewsets.ModelViewSet):
+    queryset = NowCompInfo.objects.all()
+    serializer_class = NowCompInfoSerializer
 
 
-class FootBallEuropeanViewSet(viewsets.ModelViewSet):
-    queryset = FootBallEuropean.objects.all()
-    serializer_class = FootBallEuropeanSerializer
+class SoccerTeamJifenViewSet(viewsets.ModelViewSet):
+    queryset = SoccerTeamJifen.objects.all()
+    serializer_class = SoccerTeamJifenSerializer
 
 
-class FootBallGameViewSet(viewsets.ModelViewSet):
-    queryset = FootBallGame.objects.all()
-    serializer_class = FootBallGameSerializer
+class SoccerShooterViewSet(viewsets.ModelViewSet):
+    queryset = SoccerShooter.objects.all()
+    serializer_class = SoccerShooterSerializer
 
 
-class FootBallLeagueViewSet(viewsets.ModelViewSet):
-    queryset = FootBallLeague.objects.all()
-    serializer_class = FootBallLeagueSerializer
+class SoccerMatchViewSet(viewsets.ModelViewSet):
+    queryset = SoccerMatch.objects.all()
+    serializer_class = SoccerMatchSerializer
+
+
+class SoccerMatchAsiaViewSet(viewsets.ModelViewSet):
+    queryset = SoccerMatchAsia.objects.all()
+    serializer_class = SoccerMatchAsiaSerializer
+
+
+class SoccerMatchEuropeViewSet(viewsets.ModelViewSet):
+    queryset = SoccerMatchEurope.objects.all()
+    serializer_class = SoccerMatchEuropeSerializer

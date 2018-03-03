@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
-# author: itimor
+# author: kiven
 
-from users.serializers import UserSerializer, GroupSerializer, RoleSerializer
 from rest_framework import viewsets
-
-from users.filters import UserFilter
-from users.models import Group, User, Role
+from users.serializers import UserSerializer, RoleSerializer, GroupSerializer
+from users.models import User, Role, Group
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('-create_date')
     serializer_class = UserSerializer
-    filter_class = UserFilter
-    ordering_fields = ('-create_date',)
+    search_fields = ['username']
+    filter_fields = ['groups__name']
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    filter_fields = ['name']
 
 
 class RoleViewSet(viewsets.ModelViewSet):
     queryset = Role.objects.all()
     serializer_class = RoleSerializer
+    filter_fields = ['name']

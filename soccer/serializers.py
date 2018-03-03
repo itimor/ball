@@ -1,46 +1,58 @@
 # -*- coding: utf-8 -*-
 # author: itimor
 
-from soccer.models import FootBallTeam, FootBallCompany, FootBallEuropean, FootBallGame, FootBallLeague
+from soccer.models import (SoccerNews, NowCompInfo, SoccerTeamJifen, SoccerShooter, SoccerMatch, SoccerMatchAsia,
+                           SoccerMatchEurope)
 from rest_framework import serializers
 
 
-class FootBallTeamSerializer(serializers.ModelSerializer):
-    league = serializers.SlugRelatedField(queryset=FootBallLeague.objects.all(), slug_field='name')
-
+class SoccerNewsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FootBallTeam
-        fields = ('url', 'id', 'teamId', 'name', 'cnname', 'league')
+        model = SoccerNews
+        fields = ('url', 'id', 'new_url', 'title', 'rewritten_title', 'author', 'content', 'publish_time', 'compname')
 
 
-class FootBallCompanySerializer(serializers.ModelSerializer):
+class NowCompInfoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FootBallCompany
-        fields = ('url', 'id', 'name', 'famous', 'exchange')
+        model = NowCompInfo
+        fields = ('url', 'id', 'name', 'compname', 'now_rd', 'season')
 
 
-class FootBallEuropeanSerializer(serializers.ModelSerializer):
-    name = serializers.SlugRelatedField(queryset=FootBallCompany.objects.all(), slug_field='name')
-
+class SoccerTeamJifenSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FootBallEuropean
-        fields = ('url', 'id', 'title', 'name', 'odds_ini_o1', 'odds_ini_o2', 'odds_ini_o3', 'odds_ini_return',
-            'odds_ini_time', 'odds_new_o1', 'odds_new_o2', 'odds_new_o3', 'odds_new_return', 'odds_new_time',
-            'kelly_ini_e1', 'kelly_ini_e2', 'kelly_ini_e3', 'kelly_ini_time', 'kelly_new_e1', 'kelly_new_e2',
-            'kelly_new_e3', 'kelly_new_time',)
+        model = SoccerTeamJifen
+        fields = (
+            'url', 'id', 'name', 'compname', 'season', 'team', 'total_match_num', 'win_match_num', 'lost_match_num',
+            'tie_match_num', 'win_goal_num', 'lost_goal_num', 'score')
 
 
-class FootBallGameSerializer(serializers.ModelSerializer):
-    league = serializers.SlugRelatedField(queryset=FootBallLeague.objects.all(), slug_field='name')
-    euro = serializers.SlugRelatedField(many=True, queryset=FootBallEuropean.objects.all(), slug_field='title')
-    Team1 = serializers.SlugRelatedField(queryset=FootBallTeam.objects.all(), slug_field='cnname')
-    Team2 = serializers.SlugRelatedField(queryset=FootBallTeam.objects.all(), slug_field='cnname')
+class SoccerShooterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FootBallGame
-        fields = ('url', 'id', 'Team1', 'Team2', 'Score1', 'Score2', 'MatchDate', 'MatchTime', 'league', 'euro')
+        model = SoccerShooter
+        fields = (
+            'url', 'id', 'name', 'compname', 'season', 'team', 'player', 'rank', 'show_num', 'total_goal', 'host_goal',
+            'tie_match_num', 'guest_goal')
 
 
-class FootBallLeagueSerializer(serializers.ModelSerializer):
+class SoccerMatchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FootBallLeague
-        fields = ('url', 'id', 'name')
+        model = SoccerMatch
+        fields = (
+            'url', 'id', 'name', 'compname', 'status', 'season', 'rd', 'match_date', 'host_team', 'host_goal',
+            'guest_team',
+            'guest_goal', 'match_url')
+
+
+class SoccerMatchAsiaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SoccerMatchAsia
+        fields = (
+            'url', 'id', 'name', 'match', 'bookmaker', 'lottery_type', 'initial_host_shuiwei', 'initial_guest_shuiwei',
+            'initial_pankou')
+
+
+class SoccerMatchEuropeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SoccerMatchEurope
+        fields = (
+            'url', 'id', 'name', 'match', 'bookmaker', 'lottery_type', 'initial_win', 'initial_tie', 'initial_lost')

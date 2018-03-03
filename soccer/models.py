@@ -17,39 +17,22 @@ class SoccerNews(models.Model):
         return self.title
 
 
-Match_Status = {
-    0: 'pending',
-    1: 'running',
-    2: 'end',
-}
-
-
-class SoccerMatch(models.Model):
-    compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
-    season = models.CharField(max_length=20, blank=True, verbose_name=u'赛季')
-    rd = models.CharField(max_length=20, blank=True, verbose_name=u'轮次')
-    match_date = models.CharField(max_length=100, blank=True, verbose_name=u'比赛时间')
-    host_team = models.CharField(max_length=100, blank=True, verbose_name=u'主队')
-    host_goal = models.CharField(max_length=100, blank=True, verbose_name=u'主队进球数')
-    guest_team = models.CharField(max_length=100, blank=True, verbose_name=u'客队')
-    guest_goal = models.CharField(max_length=100, blank=True, verbose_name=u'客队进球数')
-    status = models.CharField(max_length=1, choices=Match_Status.items(), default=0, verbose_name=u'客队进球数')
-    match_url = models.CharField(max_length=200, blank=True)
-
-    def __str__(self):
-        return self.compname
-
-
 class NowCompInfo(models.Model):
+    name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
     compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
     now_rd = models.CharField(max_length=20, blank=True, verbose_name=u'当前轮次')
     season = models.CharField(max_length=100, blank=True, verbose_name=u'当前赛季')
 
     def __str__(self):
-        return self.compname
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = '{}-{}'.format(self.compname, self.season)
+        super(NowCompInfo, self).save(*args, **kwargs)
 
 
 class SoccerTeamJifen(models.Model):
+    name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
     compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
     season = models.CharField(max_length=20, blank=True, verbose_name=u'赛季')
     team = models.CharField(max_length=100, blank=True, verbose_name=u'队名')
@@ -63,10 +46,15 @@ class SoccerTeamJifen(models.Model):
     score = models.IntegerField(blank=True, verbose_name=u'积分')
 
     def __str__(self):
-        return self.compname
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = '{}-{}-{}'.format(self.compname, self.season, self.team)
+        super(SoccerTeamJifen, self).save(*args, **kwargs)
 
 
 class SoccerShooter(models.Model):
+    name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
     compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
     season = models.CharField(max_length=20, blank=True, verbose_name=u'赛季')
     team = models.CharField(max_length=100, blank=True, verbose_name=u'队名')
@@ -79,56 +67,70 @@ class SoccerShooter(models.Model):
     guest_goal = models.IntegerField(blank=True, verbose_name=u'进球数')
 
     def __str__(self):
-        return self.compname
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = '{}-{}-{}-{}'.format(self.compname, self.season, self.team, self.player)
+        super(SoccerShooter, self).save(*args, **kwargs)
 
 
-class FootBallGame(models.Model):
-    name = models.CharField(u'比赛名字', unique=True, max_length=100, null=True, blank=True)
-    Team1 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'主队',
-                              related_name='team1')
-    Team2 = models.ForeignKey('FootBallTeam', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'客队',
-                              related_name='team2')
-    Score1 = models.IntegerField(u'主队得分')
-    Score2 = models.IntegerField(u'客队得分')
-    MatchDate = models.CharField(u'比赛日期', max_length=100, blank=True)
-    MatchTime = models.CharField(u'比赛时间', max_length=100, blank=True)
-    league = models.ForeignKey('FootBallLeague', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'联队')
-    euro = models.ManyToManyField('FootBallEuropean', null=True, blank=True, verbose_name=u'欧洲赔率')
+Match_Status = {
+    0: 'pending',
+    1: 'running',
+    2: 'end',
+}
+
+
+class SoccerMatch(models.Model):
+    name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
+    compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
+    status = models.CharField(max_length=3, choices=Match_Status.items(), default=0, verbose_name=u'状态')
+    season = models.CharField(max_length=20, blank=True, verbose_name=u'赛季')
+    rd = models.CharField(max_length=20, blank=True, verbose_name=u'轮次')
+    match_date = models.CharField(max_length=100, blank=True, verbose_name=u'比赛时间')
+    host_team = models.CharField(max_length=100, blank=True, verbose_name=u'主队')
+    host_goal = models.CharField(max_length=100, blank=True, verbose_name=u'主队进球数')
+    guest_team = models.CharField(max_length=100, blank=True, verbose_name=u'客队')
+    guest_goal = models.CharField(max_length=100, blank=True, verbose_name=u'客队进球数')
+    match_url = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.name = '{}-{}-{}-{}'.format(self.compname, self.host_team, self.guest_team, self.match_date)
+        super(SoccerMatch, self).save(*args, **kwargs)
 
-class FootBallCompany(models.Model):
-    name = models.CharField(u'欧赔公司', unique=True, max_length=100, blank=True)
-    famous = models.BooleanField(u'主流公司', default=False)
-    exchange = models.BooleanField(u'交易所', default=False)
+
+class SoccerMatchAsia(models.Model):
+    name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
+    match = models.ForeignKey(SoccerMatch, verbose_name=u'比赛')
+    bookmaker = models.CharField(max_length=20, blank=True, verbose_name=u'博彩公司')
+    lottery_type = models.CharField(default='asia', verbose_name=u'类型')
+    initial_host_shuiwei = models.FloatField(u'初盘主队水位', max_length=11)
+    initial_guest_shuiwei = models.FloatField(u'初盘客队水位', max_length=11)
+    initial_pankou = models.FloatField(u'初盘盘口', max_length=11)
 
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.name = '{}-{}-{}'.format(self.bookmaker, self.lottery_type, self.match)
+        super(SoccerMatchAsia, self).save(*args, **kwargs)
 
-class FootBallEuropean(models.Model):
-    title = models.CharField(u'比赛名字', unique=True, max_length=100, null=True, blank=True)
-    name = models.ForeignKey('FootBallCompany', on_delete=models.SET_NULL, null=True, blank=True, verbose_name=u'欧赔公司')
-    odds_ini_o1 = models.FloatField(u'欧赔初胜水位', max_length=11)
-    odds_ini_o2 = models.FloatField(u'欧赔初平水位', max_length=11)
-    odds_ini_o3 = models.FloatField(u'欧赔初负水位', max_length=11)
-    odds_ini_return = models.FloatField(u'欧赔初返还率', max_length=11)
-    odds_ini_time = models.DateTimeField(u'欧赔初变盘时间', max_length=11)
-    odds_new_o1 = models.FloatField(u'欧赔后胜水位', max_length=11)
-    odds_new_o2 = models.FloatField(u'欧赔后平水位', max_length=11)
-    odds_new_o3 = models.FloatField(u'欧赔后负水位', max_length=11)
-    odds_new_return = models.FloatField(u'欧赔后返还率', max_length=11)
-    odds_new_time = models.DateTimeField(u'欧赔后变盘时间', max_length=11)
-    kelly_ini_e1 = models.FloatField(u'凯利指数初胜水位', max_length=11)
-    kelly_ini_e2 = models.FloatField(u'凯利指数初平水位', max_length=11)
-    kelly_ini_e3 = models.FloatField(u'凯利指数初负水位', max_length=11)
-    kelly_ini_time = models.DateTimeField(u'欧赔初变盘时间', max_length=11)
-    kelly_new_e1 = models.FloatField(u'凯利指数后胜水位', max_length=11)
-    kelly_new_e2 = models.FloatField(u'凯利指数后平水位', max_length=11)
-    kelly_new_e3 = models.FloatField(u'凯利指数后负水位', max_length=11)
-    kelly_new_time = models.DateTimeField(u'欧赔后变盘时间', max_length=11)
+
+class SoccerMatchEurope(models.Model):
+    name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
+    match = models.ForeignKey(SoccerMatch, verbose_name=u'比赛')
+    bookmaker = models.CharField(max_length=20, blank=True, verbose_name=u'博彩公司')
+    lottery_type = models.CharField(default='europe', verbose_name=u'类型')
+    initial_win = models.FloatField(u'初盘胜', max_length=11)
+    initial_tie = models.FloatField(u'初盘平', max_length=11)
+    initial_lost = models.FloatField(u'初盘负', max_length=11)
 
     def __str__(self):
-        return self.title
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.name = '{}-{}-{}'.format(self.bookmaker, self.lottery_type, self.match)
+        super(SoccerMatchEurope, self).save(*args, **kwargs)

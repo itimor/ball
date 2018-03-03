@@ -1,6 +1,6 @@
 ## 玩个球啊
 
-![](http://xm.fjsen.com/images/attachement/jpg/site2/20160408/a41f728c34691871895059.jpg)
+![玩夏日酱的球](http://xm.fjsen.com/images/attachement/jpg/site2/20160408/a41f728c34691871895059.jpg)
 
 
 ### 玩球要点

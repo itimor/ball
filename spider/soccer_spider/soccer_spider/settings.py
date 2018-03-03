@@ -8,6 +8,15 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #
 
+import os
+import sys
+import django
+
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".."))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'ball.settings'
+
+django.setup()
+
 BOT_NAME = 'soccer_spider'
 
 SPIDER_MODULES = ['soccer_spider.spiders']

@@ -6,23 +6,11 @@
 # http://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy_djangoitem import DjangoItem
+form ball.ball.models import SoccerNews
 
-
-class News(scrapy.Item):
-    # url
-    url = scrapy.Field()
-    # 标题
-    title = scrapy.Field()
-    # 重写后的标题
-    rewritten_title = scrapy.Field()
-    # 作者
-    author = scrapy.Field()
-    # 正文
-    content = scrapy.Field()
-    # 发布时间
-    publish_time = scrapy.Field()
-    # 赛事名称
-    compname = scrapy.Field()
+class News(DjangoItem):
+    django_model = SoccerNews
 
 
 class Match(scrapy.Item):

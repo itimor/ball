@@ -68,10 +68,6 @@ class LotterySpider(scrapy.Spider):
             match_lottery["initial_host_shuiwei"] = float(d["ini"]["o1"])
             match_lottery["initial_guest_shuiwei"] = float(d["ini"]["o2"])
             match_lottery["initial_pankou"] = d["ini"]["o3"]
-            match_lottery["new_host_shuiwei"] = float(d["new"]["o1"])
-            match_lottery["new_guest_shuiwei"] = float(d["new"]["o2"])
-            match_lottery["new_pankou"] = d["new"]["o3"]
-            match_lottery["change_time"] = d["new"]["change_time"]
             yield match_lottery
 
     def crawl_oupei(self, response, host_team, guest_team, season, compname, rd):
@@ -90,8 +86,4 @@ class LotterySpider(scrapy.Spider):
             match_lottery["initial_win"] = float(d["odds"]["ini"]["o1"])
             match_lottery["initial_lost"] = float(d["odds"]["ini"]["o3"])
             match_lottery["initial_tie"] = float(d["odds"]["ini"]["o2"])
-            match_lottery["new_win"] = float(d["odds"]["new"]["o1"])
-            match_lottery["new_lost"] = float(d["odds"]["new"]["o3"])
-            match_lottery["new_tie"] = float(d["odds"]["new"]["o2"])
-            match_lottery["change_time"] = d["odds"]["new"]["change_time"]
             yield match_lottery

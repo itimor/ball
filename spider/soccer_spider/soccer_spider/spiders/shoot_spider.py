@@ -34,7 +34,6 @@ class ShooterSpider(scrapy.Spider):
                                                    compname=compname: self.crawl_round_list(response, compname))
 
     def crawl_round_list(self, response, compname):
-        round_list = response.selector.xpath('//div[@class="turnTime clearfix"]/dl/dd/a')
         season = response.selector.xpath(
             '//section[@class="leftNav"]//span[@class="mcSelectBox"]/a[@class="imitateSelect"]/b/text()').extract()[0]
         shooter_url = response.selector.xpath(
@@ -61,17 +60,10 @@ class ShooterSpider(scrapy.Spider):
             shooter["player"] = shooter_info[1]
             # 球队
             shooter["team"] = shooter_info[2]
-            # 国籍
-            shooter["nationality"] = shooter_info[3]
             # 出场数
             shooter["show_num"] = int(shooter_info[4])
             # 总进球数
             shooter["total_goal"] = int(shooter_info[5])
-            # 点球
-            try:
-                shooter["penalty"] = int(shooter_info[6])
-            except:
-                shooter["penalty"] = 0
             # 主场进球
             try:
                 shooter["host_goal"] = int(shooter_info[8])

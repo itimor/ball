@@ -96,14 +96,10 @@ class Shooter(scrapy.Item):
     player = scrapy.Field()
     # 球队
     team = scrapy.Field()
-    # 国籍
-    nationality = scrapy.Field()
     # 出场数
     show_num = scrapy.Field()
     # 总进球数
     total_goal = scrapy.Field()
-    # 点球
-    penalty = scrapy.Field()
     # 主场进球
     host_goal = scrapy.Field()
     # 客场进球
@@ -131,15 +127,6 @@ class MatchAsiaLottery(scrapy.Item):
     initial_pankou = scrapy.Field()
     # 博彩公司
     bookmaker = scrapy.Field()
-    # 及时主队水位
-    new_host_shuiwei = scrapy.Field()
-    # 及时客队水位
-    new_guest_shuiwei = scrapy.Field()
-    # 及时盘口
-    new_pankou = scrapy.Field()
-
-    # 变化时间
-    change_time = scrapy.Field()
     # asia europe
     lottery_type = scrapy.Field()
 
@@ -165,14 +152,5 @@ class MatchEuropeLottery(scrapy.Item):
     initial_lost = scrapy.Field()
     # 博彩公司
     bookmaker = scrapy.Field()
-    # 及时胜
-    new_win = scrapy.Field()
-    # 及时平
-    new_tie = scrapy.Field()
-    # 及时负
-    new_lost = scrapy.Field()
-
-    # 变化时间
-    change_time = scrapy.Field()
     # asia europe
     lottery_type = scrapy.Field()

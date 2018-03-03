@@ -104,7 +104,7 @@ class SoccerMatch(models.Model):
 
 class SoccerMatchAsia(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
-    match = models.ForeignKey(SoccerMatch, verbose_name=u'比赛')
+    match = models.ForeignKey(SoccerMatch, on_delete=models.CASCADE, verbose_name=u'比赛')
     bookmaker = models.CharField(max_length=20, blank=True, verbose_name=u'博彩公司')
     lottery_type = models.CharField(default='asia', verbose_name=u'类型')
     initial_host_shuiwei = models.FloatField(u'初盘主队水位', max_length=11)
@@ -121,7 +121,7 @@ class SoccerMatchAsia(models.Model):
 
 class SoccerMatchEurope(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
-    match = models.ForeignKey(SoccerMatch, verbose_name=u'比赛')
+    match = models.ForeignKey(SoccerMatch, on_delete=models.CASCADE, verbose_name=u'比赛')
     bookmaker = models.CharField(max_length=20, blank=True, verbose_name=u'博彩公司')
     lottery_type = models.CharField(default='europe', verbose_name=u'类型')
     initial_win = models.FloatField(u'初盘胜', max_length=11)

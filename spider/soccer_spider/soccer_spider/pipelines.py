@@ -5,9 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from . import settings
-from PIL import Image
-import math
+from soccer.models import *
 
 
 class NewsPipeline(object):
@@ -16,7 +14,10 @@ class NewsPipeline(object):
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.News'>":
             print(item["url"], dict(item))
+            new = SoccerNews.objects.update_or_create(item["url"], dict(item))
+            new.save()
         return item
+
 
 class MatchPipeline(object):
     def process_item(self, item, spider):

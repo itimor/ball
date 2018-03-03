@@ -13,8 +13,7 @@ class NewsPipeline(object):
         if spider.name not in ["news_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.News'>":
-            print(item["url"], dict(item))
-            new = SoccerNews.objects.update_or_create(item["url"], dict(item))
+            new = SoccerNews.objects.update_or_create(item["new_url"], dict(item))
             new.save()
         return item
 

@@ -93,5 +93,5 @@ class NewsSpider(scrapy.Spider):
         news["content"] = content_list
         news["publish_time"] = publish_time
         news["compname"] = compname
-        news["url"] = response.url
+        news["new_url"] = response.url
         yield news

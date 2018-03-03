@@ -12,9 +12,12 @@ import os
 import sys
 import django
 
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".."))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'ball.settings'
-django.setup()
+def setup_django_environment(path):
+    sys.path.append(os.path.join(path))
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'ball.settings'
+    django.setup()
+
+setup_django_environment("/data/python/ball")
 
 BOT_NAME = 'soccer_spider'
 

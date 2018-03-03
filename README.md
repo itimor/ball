@@ -1,6 +1,6 @@
 ## 玩个球啊
 
-![](http://www.0513520.com/zb_users/upload/2016/05/20160523213023_88494.jpg)
+![](http://xm.fjsen.com/images/attachement/jpg/site2/20160408/a41f728c34691871895059.jpg)
 
 
 ### 玩球要点

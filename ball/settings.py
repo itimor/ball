@@ -70,7 +70,7 @@ DATABASES = {
 #        'NAME': 'ball',    ## 数据库名称
 #        'USER': 'ball',
 #        'PASSWORD': 'ball110',    ## 安装 mysql 数据库时，输入的 root 用户的密码
-#        'HOST': '222.186.169.42',
+#        'HOST': '192.168.3.215',
 #    }
 # }
 

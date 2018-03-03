@@ -7,7 +7,8 @@
 
 import scrapy
 from scrapy_djangoitem import DjangoItem
-form ball.ball.models import SoccerNews
+from soccer.models import SoccerNews
+
 
 class News(DjangoItem):
     django_model = SoccerNews

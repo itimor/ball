@@ -22,11 +22,11 @@ class MatchPipeline(object):
         if spider.name not in ["match_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.Match'>":
-            SoccerMatch.objects.update_or_create(new_url=item["match_url"], title=item["name"], defaults=item)
+            SoccerMatch.objects.update_or_create(match_url=item["match_url"], name=item["name"], defaults=item)
         elif str(item.__class__) == "<class 'soccer_spider.items.NowCompInfo'>":
             NowCompInfo.objects.update_or_create(name=item["name"], compname=item["compname"], defaults=item)
         elif str(item.__class__) == "<class 'soccer_spider.items.TeamJifen'>":
-            SoccerTeamJifen.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)
+            SoccerTeamJifen.objects.update_or_create(name=item["name"], title=item["compname"], defaults=item)
         return item
 
 
@@ -35,7 +35,7 @@ class ShooterPipeline(object):
         if spider.name not in ["shooter_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.Shooter'>":
-            SoccerShooter.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)
+            SoccerShooter.objects.update_or_create(name=item["name"], title=item["compname"], defaults=item)
 
 
 class LotteryPipeline(object):
@@ -43,4 +43,4 @@ class LotteryPipeline(object):
         if spider.name not in ["lottery_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.MatchEuropeLottery'>":
-            SoccerMatchEurope.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)
+            SoccerMatchEurope.objects.update_or_create(name=item["name"], title=item["compname"], defaults=item)

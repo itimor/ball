@@ -52,7 +52,6 @@ class ShooterSpider(scrapy.Spider):
                 if info.strip() != "":
                     shooter_info.append(info.strip())
             shooter = Shooter()
-            print("xxxxx---%s---xxxxxx" % compname)
             shooter["compname"] = compname
             shooter["season"] = season
             # 排名

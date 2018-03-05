@@ -33,7 +33,7 @@ ITEM_PIPELINES = {
 
 DOWNLOADER_MIDDLEWARES = {
     'soccer_spider.middlewares.RandomUserAgent': 1,
-    'soccer_spider.middlewares.ProxyMiddleware': 100,
+    # 'soccer_spider.middlewares.ProxyMiddleware': 100,
     # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
 }
 

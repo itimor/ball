@@ -9,7 +9,7 @@ from rest_framework import serializers
 class SoccerNewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SoccerNews
-        fields = ('url', 'id', 'new_url', 'title', 'rewritten_title', 'author', 'content', 'publish_time', 'compname')
+        fields = ('url', 'id', 'new_url', 'title', 'author', 'content', 'publish_time', 'compname')
 
 
 class NowCompInfoSerializer(serializers.ModelSerializer):

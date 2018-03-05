@@ -83,12 +83,6 @@ class NewsSpider(scrapy.Spider):
 
         news = News()
         news["title"] = title
-        news["rewritten_title"] = title
-        try:
-            news["rewritten_title"] = title.split('】')[1]
-        except:
-            pass
-
         news["author"] = author
         news["content"] = content_list
         news["publish_time"] = publish_time

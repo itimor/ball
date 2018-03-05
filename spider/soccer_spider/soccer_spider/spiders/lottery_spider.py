@@ -39,9 +39,9 @@ class LotterySpider(scrapy.Spider):
                                                       host_team=d["Team1"],
                                                       guest_team=d["Team2"],
                                                       compname=compname,
-                                                      match_date=d["match_date"]: self.crawl_oupei(response, host_team,
-                                                                                                   guest_team, compname,
-                                                                                                   match_date))
+                                                      match_date=d["date"]: self.crawl_oupei(response, host_team,
+                                                                                             guest_team, compname,
+                                                                                             match_date))
 
     def crawl_oupei(self, response, host_team, guest_team, compname, match_date):
         result = json.loads(response.body)

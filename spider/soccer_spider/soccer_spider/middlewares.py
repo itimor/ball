@@ -24,8 +24,8 @@ class ProxyMiddleware(object):
         proxy = random.choice(PROXIES)
         if proxy['user_pass'] is not None:
             request.meta['proxy'] = "http://%s" % proxy['ip_port']
-            encoded_user_pass = base64.encodebytes(proxy['user_pass'])
-            request.headers['Proxy-Authorization'] = 'Basic ' + encoded_user_pass
+            encoded_user_pass = base64.b64encode(proxy['user_pass'].encode('utf-8'))
+            request.headers['Proxy-Authorization'] = 'Basic ' + str(encoded_user_pass, encoding="utf-8")
             print("************** %s: ProxyMiddleware have pass************" % proxy['ip_port'])
         else:
             print("************** %s: ProxyMiddleware no pass************" % proxy['ip_port'])

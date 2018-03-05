@@ -33,12 +33,12 @@ class SoccerTeamJifen(models.Model):
     team = models.CharField(max_length=100, blank=True, verbose_name=u'队名')
     rank = models.IntegerField(blank=True, verbose_name=u'排名')
     total_match_num = models.IntegerField(blank=True, verbose_name=u'总场数')
-    win_match_num = models.IntegerField(blank=True, verbose_name=u'胜场数')
+    win_match_num = models.IntegerField(blank=True, null=True, verbose_name=u'胜场数')
     lost_match_num = models.IntegerField(blank=True, verbose_name=u'败场数')
-    tie_match_num = models.IntegerField(blank=True, verbose_name=u'平场数')
-    win_goal_num = models.IntegerField(blank=True, verbose_name=u'进球数')
-    lost_goal_num = models.IntegerField(blank=True, verbose_name=u'失球数')
-    score = models.IntegerField(blank=True, verbose_name=u'积分')
+    tie_match_num = models.IntegerField(blank=True, null=True, verbose_name=u'平场数')
+    win_goal_num = models.IntegerField(blank=True, null=True, verbose_name=u'进球数')
+    lost_goal_num = models.IntegerField(blank=True, null=True, verbose_name=u'失球数')
+    score = models.IntegerField(blank=True, null=True, verbose_name=u'积分')
 
     def __str__(self):
         return self.name
@@ -80,7 +80,6 @@ class SoccerMatch(models.Model):
     host_goal = models.CharField(max_length=100, blank=True, verbose_name=u'主队进球数')
     guest_team = models.CharField(max_length=100, blank=True, verbose_name=u'客队')
     guest_goal = models.CharField(max_length=100, blank=True, verbose_name=u'客队进球数')
-    match_url = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.name

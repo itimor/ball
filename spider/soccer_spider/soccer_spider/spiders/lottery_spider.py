@@ -31,7 +31,6 @@ class LotterySpider(scrapy.Spider):
     def crawl_round(self, response):
         matches = json.loads(response.body)
         for d in matches["result"]["data"]:
-            print(d["LeagueType_cn"], d["Season"], d["Round"], d["Team1"], d["Team2"], d["oddsid"])
             compname = d["LeagueType_cn"]
             oupei = "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&_sport_t_=Odds&_sport_a_=euroIniNewData&id=" + d["oddsid"]
             yield scrapy.http.Request(url=oupei,

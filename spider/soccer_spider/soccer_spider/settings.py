@@ -24,7 +24,6 @@ BOT_NAME = 'soccer_spider'
 SPIDER_MODULES = ['soccer_spider.spiders']
 ITEM_PIPELINES = {
     'soccer_spider.pipelines.NewsPipeline': 2,
-    'scrapy.contrib.pipeline.images.ImagesPipeline': 1,
     'soccer_spider.pipelines.MatchPipeline': 3,
     'soccer_spider.pipelines.ShooterPipeline': 4,
     'soccer_spider.pipelines.LotteryPipeline': 5,

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
-from soccer_spider.items import Match, NowCompInfo, TeamJifen, MatchEuropeLottery
+from soccer_spider.items import MatchEuropeLottery
 
 
 class LotterySpider(scrapy.Spider):

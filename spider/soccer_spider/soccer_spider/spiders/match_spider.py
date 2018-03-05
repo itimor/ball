@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from soccer_spider.items import Match, NowCompInfo, TeamJifen, MatchAsiaLottery
+from soccer_spider.items import Match, NowCompInfo, TeamJifen
 
 
 class MatchSpider(scrapy.Spider):

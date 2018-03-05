@@ -14,7 +14,9 @@ class RandomUserAgent(object):
         return cls(crawler.settings.getlist('USER_AGENTS'))
 
     def process_request(self, request, spider):
-        request.headers.setdefault('User-Agent', random.choice(self.agents))
+        cur_agent = random.choice(self.agents)
+        print("**************User-Agent: %s************" % cur_agent)
+        request.headers.setdefault('User-Agent', cur_agent)
 
 
 class ProxyMiddleware(object):
@@ -22,9 +24,9 @@ class ProxyMiddleware(object):
         proxy = random.choice(PROXIES)
         if proxy['user_pass'] is not None:
             request.meta['proxy'] = "http://%s" % proxy['ip_port']
-            encoded_user_pass = base64.encodestring(proxy['user_pass'])
+            encoded_user_pass = base64.encodebytes(proxy['user_pass'])
             request.headers['Proxy-Authorization'] = 'Basic ' + encoded_user_pass
-            print("**************ProxyMiddleware have pass************" + proxy['ip_port'])
+            print("************** %s: ProxyMiddleware have pass************" % proxy['ip_port'])
         else:
-            print("**************ProxyMiddleware no pass************" + proxy['ip_port'])
+            print("************** %s: ProxyMiddleware no pass************" % proxy['ip_port'])
             request.meta['proxy'] = "http://%s" % proxy['ip_port']

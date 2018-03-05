@@ -81,6 +81,7 @@ Match_Status = {
 
 
 class SoccerMatch(models.Model):
+    match_url = models.CharField(unique=True, max_length=200, verbose_name=u'链接')
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
     compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
     status = models.CharField(max_length=3, choices=Match_Status.items(), default=0, verbose_name=u'状态')
@@ -97,7 +98,7 @@ class SoccerMatch(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.name = '{}-{}-{}-{}'.format(self.compname, self.host_team, self.guest_team, self.match_date)
+        self.name = '{}-{}-{}'.format(self.compname, self.host_team, self.guest_team)
         super(SoccerMatch, self).save(*args, **kwargs)
 
 

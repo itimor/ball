@@ -59,6 +59,7 @@ class MatchSpider(scrapy.Spider):
         now_comp_info["compname"] = compname
         now_comp_info["now_rd"] = now_rd
         now_comp_info["season"] = season
+        now_comp_info["name"] = '{}-{}'.format(now_comp_info["compname"], now_comp_info["season"])
         yield now_comp_info
 
     def crawl_jifen(self, response, compname, season):
@@ -91,6 +92,7 @@ class MatchSpider(scrapy.Spider):
             team_jifen["lost_goal_num"] = int(jifen_info[7])
             # 败场数
             team_jifen["score"] = int(jifen_info[14])
+            team_jifen["name"] = '{}-{}-{}'.format(team_jifen["compname"], team_jifen["season"], team_jifen["team"])
             yield team_jifen
 
     def crawl_round(self, response, compname, rd):
@@ -120,5 +122,6 @@ class MatchSpider(scrapy.Spider):
                 match["guest_goal"] = output[2].strip().split(':')[1].strip()
             match["guest_team"] = output[3].strip().split('(')[0].strip()
             match["season"] = season
-            match["url"] = url
+            match["match_url"] = url
+            match["name"] = '{}-{}-{}'.format(match["compname"], match["host_team"], match["guest_team"])
             yield match

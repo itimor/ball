@@ -74,5 +74,5 @@ class ShooterSpider(scrapy.Spider):
                 shooter["guest_goal"] = int(shooter_info[9])
             except:
                 shooter["guest_goal"] = 0
-
+            shooter["name"] = '{}-{}-{}-{}'.format(shooter["compname"], shooter["season"], shooter["team"], shooter["player"])
             yield shooter

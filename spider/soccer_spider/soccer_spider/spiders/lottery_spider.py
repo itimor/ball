@@ -58,6 +58,7 @@ class LotterySpider(scrapy.Spider):
         result = json.loads(response.body)
         for d in result["result"]["data"]:
             match_lottery = MatchAsiaLottery()
+            match_lottery["name"] = '{}-{}-{}-{}-{}'.format(d["name"], "asia", compname, host_team, guest_team)
             match_lottery["lottery_type"] = "asia"
             match_lottery["bookmaker"] = d["name"]
             match_lottery["host_team"] = host_team
@@ -76,6 +77,7 @@ class LotterySpider(scrapy.Spider):
             return
         for d in result["result"]["data"]:
             match_lottery = MatchEuropeLottery()
+            match_lottery["name"] = '{}-{}-{}-{}-{}'.format(d["name"], "europe", compname, host_team, guest_team)
             match_lottery["lottery_type"] = "europe"
             match_lottery["bookmaker"] = d["name"]
             match_lottery["host_team"] = host_team

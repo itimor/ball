@@ -13,7 +13,7 @@ class NewsPipeline(object):
         if spider.name not in ["news_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.News'>":
-            new = SoccerNews.objects.update_or_create(new_url=item["new_url"], title=item["title"], defaults=item)
+            SoccerNews.objects.update_or_create(new_url=item["new_url"], title=item["title"], defaults=item)
         return item
 
 
@@ -22,11 +22,11 @@ class MatchPipeline(object):
         if spider.name not in ["match_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.Match'>":
-            print(item["url"], dict(item))
+            SoccerMatch.objects.update_or_create(new_url=item["match_url"], title=item["name"], defaults=item)
         elif str(item.__class__) == "<class 'soccer_spider.items.NowCompInfo'>":
-            print(item["compname"], dict(item))
+            NowCompInfo.objects.update_or_create(name=item["name"], compname=item["compname"], defaults=item)
         elif str(item.__class__) == "<class 'soccer_spider.items.TeamJifen'>":
-            print(item["compname"], item["team"], item["season"], dict(item))
+            SoccerTeamJifen.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)
         return item
 
 
@@ -35,7 +35,7 @@ class ShooterPipeline(object):
         if spider.name not in ["shooter_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.Shooter'>":
-            print(item["compname"], item["player"], item["season"], dict(item))
+            SoccerShooter.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)
 
 
 class LotteryPipeline(object):
@@ -43,16 +43,6 @@ class LotteryPipeline(object):
         if spider.name not in ["lottery_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.MatchAsiaLottery'>":
-            print(item["compname"],
-                  item["season"],
-                  item["rd"],
-                  item["host_team"],
-                  item["guest_team"],
-                  item["bookmaker"], dict(item))
+            SoccerMatchAsia.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)
         elif str(item.__class__) == "<class 'soccer_spider.items.MatchEuropeLottery'>":
-            print(item["compname"],
-                  item["season"],
-                  item["rd"],
-                  item["host_team"],
-                  item["guest_team"],
-                  item["bookmaker"], dict(item))
+            SoccerMatchEurope.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)

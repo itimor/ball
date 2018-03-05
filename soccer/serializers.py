@@ -29,8 +29,7 @@ class SoccerShooterSerializer(serializers.ModelSerializer):
     class Meta:
         model = SoccerShooter
         fields = (
-            'url', 'id', 'name', 'compname', 'season', 'team', 'player', 'rank', 'show_num', 'total_goal', 'host_goal',
-            'tie_match_num', 'guest_goal')
+            'url', 'id', 'name', 'compname', 'season', 'team', 'player', 'rank', 'show_num', 'total_goal', 'host_goal', 'guest_goal')
 
 
 class SoccerMatchSerializer(serializers.ModelSerializer):

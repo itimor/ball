@@ -54,8 +54,7 @@ class SoccerShooter(models.Model):
     show_num = models.IntegerField(blank=True, verbose_name=u'出场数')
     total_goal = models.IntegerField(blank=True, verbose_name=u'总进球数')
     host_goal = models.IntegerField(blank=True, verbose_name=u'主场进球')
-    tie_match_num = models.IntegerField(blank=True, verbose_name=u'客场进球')
-    guest_goal = models.IntegerField(blank=True, verbose_name=u'进球数')
+    guest_goal = models.IntegerField(blank=True, verbose_name=u'客场进球')
 
     def __str__(self):
         return self.name

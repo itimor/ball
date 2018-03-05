@@ -43,4 +43,4 @@ class LotteryPipeline(object):
         if spider.name not in ["lottery_spider"]:
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.MatchEuropeLottery'>":
-            SoccerMatchEurope.objects.update_or_create(name=item["name"], compname=item["compname"], defaults=item)
+            SoccerMatchEurope.objects.update_or_create(name=item["name"], bookmaker=item["bookmaker"], defaults=item)

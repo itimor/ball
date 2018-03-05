@@ -25,10 +25,6 @@ class NowCompInfo(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        self.name = '{}-{}'.format(self.compname, self.season)
-        super(NowCompInfo, self).save(*args, **kwargs)
-
 
 class SoccerTeamJifen(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
@@ -47,10 +43,6 @@ class SoccerTeamJifen(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        self.name = '{}-{}-{}'.format(self.compname, self.season, self.team)
-        super(SoccerTeamJifen, self).save(*args, **kwargs)
-
 
 class SoccerShooter(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
@@ -67,10 +59,6 @@ class SoccerShooter(models.Model):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        self.name = '{}-{}-{}-{}'.format(self.compname, self.season, self.team, self.player)
-        super(SoccerShooter, self).save(*args, **kwargs)
 
 
 Match_Status = {
@@ -97,10 +85,6 @@ class SoccerMatch(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        self.name = '{}-{}-{}'.format(self.compname, self.host_team, self.guest_team)
-        super(SoccerMatch, self).save(*args, **kwargs)
-
 
 class SoccerMatchEurope(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
@@ -113,7 +97,3 @@ class SoccerMatchEurope(models.Model):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        self.name = '{}-{}-{}'.format(self.bookmaker, self.lottery_type, self.match)
-        super(SoccerMatchEurope, self).save(*args, **kwargs)

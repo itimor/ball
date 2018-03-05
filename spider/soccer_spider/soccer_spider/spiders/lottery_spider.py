@@ -52,11 +52,11 @@ class LotterySpider(scrapy.Spider):
             match_lottery["name"] = '{}-{}-{}-{}-{}'.format(d["name"], "europe", compname, host_team, guest_team)
             match_lottery["lottery_type"] = "europe"
             match_lottery["bookmaker"] = d["name"]
-            match_lottery["host_team"] = host_team
-            match_lottery["guest_team"] = guest_team
-            match_lottery["season"] = season + "/" + str(int(season) + 1)
-            match_lottery["compname"] = compname
-            match_lottery["rd"] = rd
+            # match_lottery["host_team"] = host_team
+            # match_lottery["guest_team"] = guest_team
+            # match_lottery["season"] = season + "/" + str(int(season) + 1)
+            # match_lottery["compname"] = compname
+            # match_lottery["rd"] = rd
             match_lottery["initial_win"] = float(d["odds"]["ini"]["o1"])
             match_lottery["initial_lost"] = float(d["odds"]["ini"]["o3"])
             match_lottery["initial_tie"] = float(d["odds"]["ini"]["o2"])

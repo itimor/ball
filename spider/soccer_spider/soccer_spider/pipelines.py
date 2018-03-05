@@ -14,7 +14,7 @@ class NewsPipeline(object):
             return item
         if str(item.__class__) == "<class 'soccer_spider.items.News'>":
             print(item["title"])
-            new = SoccerNews.objects.update_or_create(new_url = item["new_url"], title = item["title"], **item)
+            new = SoccerNews.objects.update_or_create(new_url=item["new_url"], title=item["title"], **item)
             new.save()
         return item
 

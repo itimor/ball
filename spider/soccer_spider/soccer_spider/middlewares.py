@@ -22,7 +22,7 @@ class RandomUserAgent(object):
 class ProxyMiddleware(object):
     def process_request(self, request, spider):
         proxy = random.choice(PROXIES)
-        if not proxy['user_pass']:
+        if proxy['user_pass']:
             request.meta['proxy'] = "http://%s" % proxy['ip_port']
             encoded_user_pass = base64.b64encode(proxy['user_pass'].encode('utf-8'))
             request.headers['Proxy-Authorization'] = 'Basic ' + str(encoded_user_pass, encoding="utf-8")

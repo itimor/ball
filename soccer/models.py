@@ -60,18 +60,11 @@ class SoccerShooter(models.Model):
         return self.name
 
 
-Match_Status = {
-    0: 'pending',
-    1: 'running',
-    2: 'end',
-}
-
-
 class SoccerMatch(models.Model):
     match_url = models.CharField(unique=True, max_length=200, verbose_name=u'链接')
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
     compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
-    status = models.CharField(max_length=3, choices=Match_Status.items(), default=0, verbose_name=u'状态')
+    status = models.CharField(max_length=20, blank=True, verbose_name=u'状态')
     season = models.CharField(max_length=20, blank=True, verbose_name=u'赛季')
     rd = models.CharField(max_length=20, blank=True, verbose_name=u'轮次')
     match_date = models.CharField(max_length=100, blank=True, verbose_name=u'比赛时间')

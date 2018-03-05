@@ -37,15 +37,8 @@ DOWNLOADER_MIDDLEWARES = {
 
 NEWSPIDER_MODULE = 'soccer_spider.spiders'
 
-IMAGES_STORE = '/home/cugbacm/zhuzekun/soccer/img'
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36"
-
-DOWNLOAD_DELAY = 2
-
-SMALL_IMAGE_WIDTH = 270
-SMALL_IMAGE_HEIGHT = 180
 
 USER_AGENTS = [
     # ———————————————— Chrome ————————————————

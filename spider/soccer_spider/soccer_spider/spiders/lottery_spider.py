@@ -32,24 +32,26 @@ class LotterySpider(scrapy.Spider):
         matches = json.loads(response.body)
         for d in matches["result"]["data"]:
             compname = d["LeagueType_cn"]
-            oupei = "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&_sport_t_=Odds&_sport_a_=euroIniNewData&id=" + d["oddsid"]
+            oupei = "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&_sport_t_=Odds&_sport_a_=euroIniNewData&id=" + \
+                    d["oddsid"]
             yield scrapy.http.Request(url=oupei,
                                       callback=lambda response,
                                                       host_team=d["Team1"],
                                                       guest_team=d["Team2"],
-                                                      season=d["Season"],
                                                       compname=compname,
-                                                      rd=int(d["Round"]): self.crawl_oupei(response, host_team,
-                                                                                           guest_team, season, compname,
-                                                                                           rd))
+                                                      match_date=d["match_date"]: self.crawl_oupei(response, host_team,
+                                                                                                   guest_team, compname,
+                                                                                                   match_date))
 
-    def crawl_oupei(self, response, host_team, guest_team, season, compname, rd):
+    def crawl_oupei(self, response, host_team, guest_team, compname, match_date):
         result = json.loads(response.body)
         if result["result"]["status"]["code"] != 0:
             return
         for d in result["result"]["data"]:
             match_lottery = MatchEuropeLottery()
-            match_lottery["name"] = '{}-{}-{}-{}-{}'.format(d["name"], "europe", compname, host_team, guest_team)
+            match_lottery["name"] = '{}-{}-{}-{}-{}-{}'.format(d["name"], "europe", compname, host_team, guest_team,
+                                                               match_date)
+            match_lottery["match"] = '{}-{}-{}-{}'.format(compname, host_team, guest_team, match_date)
             match_lottery["lottery_type"] = "europe"
             match_lottery["bookmaker"] = d["name"]
             # match_lottery["host_team"] = host_team

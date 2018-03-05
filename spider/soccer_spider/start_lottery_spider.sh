@@ -1,4 +1,5 @@
-#!bin/bash
+#!/bin/bash
+
 while :
 do
     scrapy crawl lottery_spider

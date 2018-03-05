@@ -102,23 +102,6 @@ class SoccerMatch(models.Model):
         super(SoccerMatch, self).save(*args, **kwargs)
 
 
-class SoccerMatchAsia(models.Model):
-    name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
-    match = models.ForeignKey(SoccerMatch, on_delete=models.CASCADE, verbose_name=u'比赛')
-    bookmaker = models.CharField(max_length=20, blank=True, verbose_name=u'博彩公司')
-    lottery_type = models.CharField(default='asia', max_length=10, verbose_name=u'类型')
-    initial_host_shuiwei = models.FloatField(u'初盘主队水位', max_length=11)
-    initial_guest_shuiwei = models.FloatField(u'初盘客队水位', max_length=11)
-    initial_pankou = models.FloatField(u'初盘盘口', max_length=11)
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        self.name = '{}-{}-{}'.format(self.bookmaker, self.lottery_type, self.match)
-        super(SoccerMatchAsia, self).save(*args, **kwargs)
-
-
 class SoccerMatchEurope(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
     match = models.ForeignKey(SoccerMatch, on_delete=models.CASCADE, verbose_name=u'比赛')

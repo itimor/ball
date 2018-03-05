@@ -11,12 +11,11 @@ router.register(r'groups', GroupViewSet)
 router.register(r'roles', RoleViewSet)
 
 from soccer.views import (SoccerNewsViewSet, NowCompInfoViewSet, SoccerTeamJifenViewSet, SoccerShooterViewSet,
-                          SoccerMatchViewSet, SoccerMatchAsiaViewSet, SoccerMatchEuropeViewSet)
+                          SoccerMatchViewSet, SoccerMatchEuropeViewSet)
 
 router.register(r'soccernews', SoccerNewsViewSet)
 router.register(r'nowcompinfos', NowCompInfoViewSet)
 router.register(r'soccerteamjifens', SoccerTeamJifenViewSet)
 router.register(r'soccershooters', SoccerShooterViewSet)
 router.register(r'soccermatchs', SoccerMatchViewSet)
-router.register(r'soccermatchasias', SoccerMatchAsiaViewSet)
 router.register(r'soccermatcheuros', SoccerMatchEuropeViewSet)

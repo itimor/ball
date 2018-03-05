@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # author: itimor
 
-from soccer.models import (SoccerNews, NowCompInfo, SoccerTeamJifen, SoccerShooter, SoccerMatch, SoccerMatchAsia,
-                           SoccerMatchEurope)
+from soccer.models import SoccerNews, NowCompInfo, SoccerTeamJifen, SoccerShooter, SoccerMatch, SoccerMatchEurope
 from rest_framework import serializers
 
 
@@ -41,14 +40,6 @@ class SoccerMatchSerializer(serializers.ModelSerializer):
             'url', 'id', 'name', 'compname', 'status', 'season', 'rd', 'match_date', 'host_team', 'host_goal',
             'guest_team',
             'guest_goal', 'match_url')
-
-
-class SoccerMatchAsiaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SoccerMatchAsia
-        fields = (
-            'url', 'id', 'name', 'match', 'bookmaker', 'lottery_type', 'initial_host_shuiwei', 'initial_guest_shuiwei',
-            'initial_pankou')
 
 
 class SoccerMatchEuropeSerializer(serializers.ModelSerializer):

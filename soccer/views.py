@@ -2,11 +2,9 @@
 # author: itimor
 
 from rest_framework import viewsets
-from soccer.models import (SoccerNews, NowCompInfo, SoccerTeamJifen, SoccerShooter, SoccerMatch, SoccerMatchAsia,
-                           SoccerMatchEurope)
+from soccer.models import SoccerNews, NowCompInfo, SoccerTeamJifen, SoccerShooter, SoccerMatch, SoccerMatchEurope
 from soccer.serializers import (SoccerNewsSerializer, NowCompInfoSerializer, SoccerTeamJifenSerializer,
-                                SoccerShooterSerializer, SoccerMatchSerializer, SoccerMatchAsiaSerializer,
-                                SoccerMatchEuropeSerializer)
+                                SoccerShooterSerializer, SoccerMatchSerializer, SoccerMatchEuropeSerializer)
 
 
 class SoccerNewsViewSet(viewsets.ModelViewSet):
@@ -32,11 +30,6 @@ class SoccerShooterViewSet(viewsets.ModelViewSet):
 class SoccerMatchViewSet(viewsets.ModelViewSet):
     queryset = SoccerMatch.objects.all()
     serializer_class = SoccerMatchSerializer
-
-
-class SoccerMatchAsiaViewSet(viewsets.ModelViewSet):
-    queryset = SoccerMatchAsia.objects.all()
-    serializer_class = SoccerMatchAsiaSerializer
 
 
 class SoccerMatchEuropeViewSet(viewsets.ModelViewSet):

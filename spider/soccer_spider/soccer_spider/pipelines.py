@@ -42,7 +42,5 @@ class LotteryPipeline(object):
     def process_item(self, item, spider):
         if spider.name not in ["lottery_spider"]:
             return item
-        if str(item.__class__) == "<class 'soccer_spider.items.MatchAsiaLottery'>":
-            SoccerMatchAsia.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)
-        elif str(item.__class__) == "<class 'soccer_spider.items.MatchEuropeLottery'>":
+        if str(item.__class__) == "<class 'soccer_spider.items.MatchEuropeLottery'>":
             SoccerMatchEurope.objects.update_or_create(new_url=item["name"], title=item["compname"], defaults=item)

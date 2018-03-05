@@ -33,9 +33,5 @@ class Shooter(scrapy.Item):
     django_model = SoccerShooter
 
 
-class MatchAsiaLottery(scrapy.Item):
-    django_model = SoccerMatchAsia
-
-
 class MatchEuropeLottery(scrapy.Item):
     django_model = SoccerMatchEurope

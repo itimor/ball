@@ -86,7 +86,7 @@ class SoccerMatch(models.Model):
 
 class SoccerMatchEurope(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
-    match = models.ForeignKey(SoccerMatch, on_delete=models.CASCADE, verbose_name=u'比赛')
+    match = models.CharField(max_length=200, unique=True, verbose_name=u'比赛')
     bookmaker = models.CharField(max_length=20, blank=True, verbose_name=u'博彩公司')
     lottery_type = models.CharField(default='europe', max_length=10, verbose_name=u'类型')
     initial_win = models.FloatField(u'初盘胜', max_length=11)

@@ -19,8 +19,8 @@ class SoccerNews(models.Model):
 class NowCompInfo(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name=u'名称')
     compname = models.CharField(max_length=20, blank=True, verbose_name=u'联赛名称')
-    now_rd = models.CharField(max_length=20, blank=True, verbose_name=u'当前轮次')
-    season = models.CharField(max_length=100, blank=True, verbose_name=u'当前赛季')
+    now_rd = models.CharField(max_length=20, blank=True, null=True, verbose_name=u'当前轮次')
+    season = models.CharField(max_length=100, blank=True, null=True, verbose_name=u'当前赛季')
 
     def __str__(self):
         return self.name

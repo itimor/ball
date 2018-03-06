@@ -19,7 +19,7 @@ def setup_django_environment(path):
     django.setup()
 
 
-setup_django_environment("/data/python/ball")
+setup_django_environment("/data/python/ball")  # django项目实际目录
 
 BOT_NAME = 'soccer_spider'
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+
 import scrapy
-import json
 from soccer_spider.items import News
 
 
@@ -21,6 +21,8 @@ class NewsSpider(scrapy.Spider):
         yijia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=3161"
         # 德甲
         dejia_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=3162"
+        # 欧冠
+        ouwin_url = "http://ba2.win007.com/pub/ThemePageContent?conditions=1&order=1&id=7454"
 
         compname = "英超"
         for i in range(1, 3):
@@ -46,6 +48,13 @@ class NewsSpider(scrapy.Spider):
         compname = "德甲"
         for i in range(1, 3):
             page_url = dejia_url + "&page=" + str(i)
+            yield scrapy.http.Request(url=page_url,
+                                      callback=lambda response,
+                                                      compname=compname: self.crawl_news_list(response, compname))
+
+        compname = "欧冠"
+        for i in range(1, 3):
+            page_url = ouwin_url + "&page=" + str(i)
             yield scrapy.http.Request(url=page_url,
                                       callback=lambda response,
                                                       compname=compname: self.crawl_news_list(response, compname))

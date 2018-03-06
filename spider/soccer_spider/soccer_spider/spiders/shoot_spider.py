@@ -28,6 +28,10 @@ class ShooterSpider(scrapy.Spider):
         xijia_match = "http://saishi.caipiao.163.com/7.html"
         yield self.crawl_comp(xijia_match, "西甲")
 
+        # 欧冠
+        xijia_match = "http://saishi.caipiao.163.com/10.html"
+        yield self.crawl_comp(xijia_match, "欧冠")
+
     def crawl_comp(self, url, compname):
         return scrapy.http.Request(url=url,
                                    callback=lambda response,

@@ -16,8 +16,6 @@ class LotterySpider(scrapy.Spider):
         "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&%20_sport_t_=Odds&_sport_a_=typeSDMatches&type=23",
         # 德甲
         "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&%20_sport_t_=Odds&_sport_a_=typeSDMatches&type=22",
-        # 欧冠
-        "http://platform.sina.com.cn/sports_all/client_api?app_key=3979320659&%20_sport_t_=Odds&_sport_a_=typeSDMatches&type=10",
     )
 
     def parse(self, response):

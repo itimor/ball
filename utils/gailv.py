@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # author: itimor
-# 计算赔率代表的胜负概率
+# desc: 计算赔率代表的胜负概率
 
 
 def gvcount(x, y, z):

@@ -2,7 +2,7 @@
 # author: itimor
 # desc: 计算各欧赔公司的赔率胜负概率与实际赛果有出入时，计算加分还是扣分
 
-from gailv import gvcount
+from .gailv import gvcount
 
 
 def rank_socer(s, p, f, real):

@@ -22,7 +22,7 @@ for euro_rank in euro_ranks:
 
 
 '''
-5Dimes 99
-Intralot 99
-Betsson Sportsbook 99
+5Dimes
+Intralot
+Betsson Sportsbook
 '''

@@ -123,5 +123,5 @@ class MatchSpider(scrapy.Spider):
             match["guest_team"] = output[3].strip().split('(')[0].strip()
             match["season"] = season
             match["match_url"] = url
-            match["name"] = '{}-{}-{}-{}'.format(match["compname"], match["host_team"], match["guest_team"], match["match_date"])
+            match["name"] = '{}-{}-{}-{}'.format(match["compname"], match["host_team"], match["guest_team"], match["match_date"].split(' ')[0])
             yield match

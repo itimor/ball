@@ -16,10 +16,7 @@ for match in matchs:
         rank_socer_count = rank_socer(euro.initial_win, euro.initial_tie, euro.initial_lost, spf_count)
         euro_ranks[euro.bookmaker] = n + rank_socer_count
 
-for euro_rank in euro_ranks:
-    if euro_ranks[euro_rank] > 98:
-        print(euro_rank, euro_ranks[euro_rank])
-
+sorted(euro_ranks.items(), key=lambda item: item[1])[-3:]
 
 '''
 5Dimes

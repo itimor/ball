@@ -35,9 +35,9 @@ def rank_socer(s, p, f, real):
     else:
         diff = dd['d_socer'] - dc[real]
         if abs(diff) > 20.998:
-            return -2
+            return -4
         else:
-            return -1
+            return -2
 
 
 if __name__ == '__main__':
